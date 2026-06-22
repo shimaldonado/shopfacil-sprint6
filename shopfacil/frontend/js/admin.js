@@ -1,5 +1,4 @@
-﻿
-const API_URL = window.SHOPFACIL_API_URL || "https://shopfacil-api.onrender.com/api";
+const API_ADMIN = window.SHOPFACIL_API_URL || 'http://localhost:3000/api';
 let usuariosCache = [];
 
 const rolLabels = {
@@ -9,9 +8,9 @@ const rolLabels = {
 };
 
 const rolIconos = {
-  admin: 'ðŸ›¡ï¸',
-  vendedor: 'ðŸª',
-  comprador: 'ðŸ›ï¸'
+  admin: '🛡️',
+  vendedor: '🏪',
+  comprador: '🛍️'
 };
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -19,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const token = localStorage.getItem('token');
 
   if (!usuario || !token || usuario.rol !== 'admin') {
-    alert('Solo el administrador puede ingresar a esta pÃ¡gina');
+    alert('Solo el administrador puede ingresar a esta página');
     window.location.href = 'index.html';
     return;
   }
@@ -57,11 +56,11 @@ async function cargarDashboardAdmin() {
 
     contenedor.innerHTML = `
       <div class="dashboard-grid dashboard-grid-admin">
-        <article class="dashboard-card"><span>ðŸ‘¥</span><p>Usuarios</p><strong>${Number(u.total_usuarios || 0)}</strong></article>
-        <article class="dashboard-card"><span>ðŸª</span><p>Vendedores</p><strong>${Number(u.vendedores || 0)}</strong></article>
-        <article class="dashboard-card"><span>ðŸ›’</span><p>Pedidos</p><strong>${Number(v.total_pedidos || 0)}</strong></article>
-        <article class="dashboard-card"><span>ðŸ’µ</span><p>Ventas</p><strong>$${Number(v.ingresos_totales || 0).toFixed(2)}</strong></article>
-        <article class="dashboard-card"><span>ðŸ“¦</span><p>Productos</p><strong>${Number(c.total_productos || 0)}</strong></article>
+        <article class="dashboard-card"><span>👥</span><p>Usuarios</p><strong>${Number(u.total_usuarios || 0)}</strong></article>
+        <article class="dashboard-card"><span>🏪</span><p>Vendedores</p><strong>${Number(u.vendedores || 0)}</strong></article>
+        <article class="dashboard-card"><span>🛒</span><p>Pedidos</p><strong>${Number(v.total_pedidos || 0)}</strong></article>
+        <article class="dashboard-card"><span>💵</span><p>Ventas</p><strong>$${Number(v.ingresos_totales || 0).toFixed(2)}</strong></article>
+        <article class="dashboard-card"><span>📦</span><p>Productos</p><strong>${Number(c.total_productos || 0)}</strong></article>
       </div>
       <div class="dashboard-columns">
         <div class="dashboard-box">
@@ -73,7 +72,7 @@ async function cargarDashboardAdmin() {
             </div>`).join('') : '<p class="estado-vacio">No hay pedidos registrados.</p>'}
         </div>
         <div class="dashboard-box">
-          <h4>Vendedores con mÃ¡s ventas</h4>
+          <h4>Vendedores con más ventas</h4>
           ${top.length ? top.map(vendedor => `
             <div class="dashboard-list-item">
               <span>${escapeHtml(vendedor.nombre)}</span>
@@ -96,15 +95,15 @@ function obtenerUsuarioActual() {
 function corregirTexto(texto) {
   if (!texto) return '';
   return String(texto)
-    .replaceAll('ÃƒÂ¡', 'Ã¡')
-    .replaceAll('ÃƒÂ©', 'Ã©')
-    .replaceAll('ÃƒÂ­', 'Ã­')
-    .replaceAll('ÃƒÂ³', 'Ã³')
-    .replaceAll('ÃƒÂº', 'Ãº')
-    .replaceAll('ÃƒÂ±', 'Ã±')
-    .replaceAll('Ãƒ', 'Ã')
-    .replaceAll('Ãƒâ€°', 'Ã‰')
-    .replaceAll('Ãƒ"', 'Ã“');
+    .replaceAll('Ã¡', 'á')
+    .replaceAll('Ã©', 'é')
+    .replaceAll('Ã­', 'í')
+    .replaceAll('Ã³', 'ó')
+    .replaceAll('Ãº', 'ú')
+    .replaceAll('Ã±', 'ñ')
+    .replaceAll('Ã', 'Á')
+    .replaceAll('Ã‰', 'É')
+    .replaceAll('Ã"', 'Ó');
 }
 function configurarNavbarAdmin(usuario) {
   const nav = document.getElementById('navAdmin');
@@ -112,8 +111,8 @@ function configurarNavbarAdmin(usuario) {
 
   nav.innerHTML = `
     <span class="admin-nav-user">Hola, ${corregirTexto(usuario.nombre)}</span>
-    <a href="index.html">CatÃ¡logo</a>
-    <a href="#" onclick="cerrarSesion()">Cerrar sesiÃ³n</a>
+    <a href="index.html">Catálogo</a>
+    <a href="#" onclick="cerrarSesion()">Cerrar sesión</a>
   `;
 }
 
@@ -198,7 +197,7 @@ function renderUsuarios(usuarios) {
     const esUsuarioActual = Number(usuario.id) === Number(usuarioActual.id);
     const inicial = (usuario.nombre || '?').charAt(0).toUpperCase();
     const rolTexto = rolLabels[usuario.rol] || usuario.rol;
-    const rolIcono = rolIconos[usuario.rol] || 'ðŸ‘¤';
+    const rolIcono = rolIconos[usuario.rol] || '👤';
 
     return `
       <tr>
@@ -221,7 +220,7 @@ function renderUsuarios(usuarios) {
         <td>
           <div class="admin-row-actions">
             ${esAdmin
-              ? `<span class="protected-pill">ðŸ”’ Protegido</span>`
+              ? `<span class="protected-pill">🔒 Protegido</span>`
               : renderBotonEstado(usuario)
             }
           </div>
@@ -236,8 +235,8 @@ function renderUsuarios(usuarios) {
 
       return `
         <select class="role-select" onchange="cambiarRol(${usuarioFila.id}, this.value)">
-          <option value="comprador" ${usuarioFila.rol === 'comprador' ? 'selected' : ''}>ðŸ›ï¸ Comprador</option>
-          <option value="vendedor" ${usuarioFila.rol === 'vendedor' ? 'selected' : ''}>ðŸª Vendedor</option>
+          <option value="comprador" ${usuarioFila.rol === 'comprador' ? 'selected' : ''}>🛍️ Comprador</option>
+          <option value="vendedor" ${usuarioFila.rol === 'vendedor' ? 'selected' : ''}>🏪 Vendedor</option>
         </select>
       `;
     }
@@ -277,7 +276,7 @@ async function cambiarRol(id, rol) {
     await cargarUsuarios();
   } catch (error) {
     console.error(error);
-    mostrarMensaje('Error de conexiÃ³n al cambiar rol', 'error');
+    mostrarMensaje('Error de conexión al cambiar rol', 'error');
     await cargarUsuarios();
   }
 }
@@ -286,7 +285,7 @@ async function cambiarEstado(id, activo) {
   const token = localStorage.getItem('token');
   const accion = activo ? 'activar' : 'desactivar';
 
-  const confirmar = confirm(`Â¿Seguro que deseas ${accion} este usuario?`);
+  const confirmar = confirm(`¿Seguro que deseas ${accion} este usuario?`);
   if (!confirmar) {
     return;
   }
@@ -312,7 +311,7 @@ async function cambiarEstado(id, activo) {
     await cargarUsuarios();
   } catch (error) {
     console.error(error);
-    mostrarMensaje('Error de conexiÃ³n al cambiar estado', 'error');
+    mostrarMensaje('Error de conexión al cambiar estado', 'error');
   }
 }
 
@@ -325,12 +324,12 @@ async function crearVendedor(event) {
   const password = document.getElementById('passwordVendedor').value;
 
   if (!nombre || !correo || !password) {
-    mostrarMensaje('Completa nombre, correo y contraseÃ±a', 'error');
+    mostrarMensaje('Completa nombre, correo y contraseña', 'error');
     return;
   }
 
   if (password.length < 6) {
-    mostrarMensaje('La contraseÃ±a debe tener al menos 6 caracteres', 'error');
+    mostrarMensaje('La contraseña debe tener al menos 6 caracteres', 'error');
     return;
   }
 
@@ -356,7 +355,7 @@ async function crearVendedor(event) {
     await cargarUsuarios();
   } catch (error) {
     console.error(error);
-    mostrarMensaje('Error de conexiÃ³n al registrar vendedor', 'error');
+    mostrarMensaje('Error de conexión al registrar vendedor', 'error');
   }
 }
 
@@ -387,4 +386,3 @@ function cerrarSesion() {
   localStorage.removeItem('usuario');
   window.location.href = 'login.html';
 }
-

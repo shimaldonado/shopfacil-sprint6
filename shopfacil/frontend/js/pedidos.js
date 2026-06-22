@@ -1,11 +1,11 @@
-﻿const API_PEDIDOS = window.SHOPFACIL_API_URL || 'https://shopfacil-api.onrender.com/api';
+const API_PEDIDOS = window.SHOPFACIL_API_URL || 'http://localhost:3000/api';
 
 window.onload = function () {
   const usuario = JSON.parse(localStorage.getItem('usuario'));
   const token = localStorage.getItem('token');
 
   if (!usuario || !token) {
-    alert('Debes iniciar sesiÃ³n para ver tus pedidos');
+    alert('Debes iniciar sesión para ver tus pedidos');
     window.location.href = 'login.html';
     return;
   }
@@ -41,12 +41,12 @@ function metodoPagoTexto(metodo) {
 
 function estadoTexto(estado) {
   const textos = {
-    pendiente: 'â³ Pendiente',
-    en_proceso: 'ðŸ”„ En proceso',
-    enviado: 'ðŸšš Enviado',
-    entregado: 'âœ… Entregado',
-    cancelacion_solicitada: 'ðŸŸ  CancelaciÃ³n solicitada',
-    cancelado: 'âŒ Cancelado'
+    pendiente: '⏳ Pendiente',
+    en_proceso: '🔄 En proceso',
+    enviado: '🚚 Enviado',
+    entregado: '✅ Entregado',
+    cancelacion_solicitada: '🟠 Cancelación solicitada',
+    cancelado: '❌ Cancelado'
   };
 
   return textos[estado] || estado;
@@ -104,7 +104,7 @@ function renderSeguimiento(pedido) {
       <div class="tracking-step ${activo ? 'activo' : ''}">
         <div class="tracking-dot"></div>
         <div>
-          <strong>${estadoTexto(estado).replace(/[â³ðŸ”„ðŸššâœ…]/g, '').trim()}</strong>
+          <strong>${estadoTexto(estado).replace(/[⏳🔄🚚✅]/g, '').trim()}</strong>
           <span>${evento ? formatearFecha(evento.created_at) : 'Pendiente'}</span>
         </div>
       </div>
@@ -116,7 +116,7 @@ function renderSeguimiento(pedido) {
       <div class="tracking-step activo tracking-cancelado">
         <div class="tracking-dot"></div>
         <div>
-          <strong>${estadoTexto(pedido.estado).replace(/[ðŸŸ âŒ]/g, '').trim()}</strong>
+          <strong>${estadoTexto(pedido.estado).replace(/[🟠❌]/g, '').trim()}</strong>
           <span>${formatearFecha((seguimiento.find(item => item.estado === pedido.estado) || {}).created_at)}</span>
         </div>
       </div>
@@ -131,14 +131,14 @@ function renderAccionesComprador(pedido) {
     return `
       <div class="pedido-acciones-comprador">
         <button class="btn-cancelar-pedido" onclick="solicitarCancelacion(${pedido.id})">
-          Solicitar cancelaciÃ³n
+          Solicitar cancelación
         </button>
       </div>
     `;
   }
 
   if (pedido.estado === 'cancelacion_solicitada') {
-    return `<p class="nota-cancelacion">Solicitud de cancelaciÃ³n enviada al vendedor.</p>`;
+    return `<p class="nota-cancelacion">Solicitud de cancelación enviada al vendedor.</p>`;
   }
 
   return '';
@@ -166,11 +166,11 @@ async function cargarPedidos() {
     if (pedidos.length === 0) {
       div.innerHTML = `
         <div class="vacio">
-          <p style="font-size:48px;">ðŸ“‹</p>
+          <p style="font-size:48px;">📋</p>
           <h3>No tienes pedidos registrados</h3>
-          <p>Cuando confirmes una compra, aparecerÃ¡ aquÃ­.</p>
+          <p>Cuando confirmes una compra, aparecerá aquí.</p>
           <a href="index.html" class="btn" style="display:inline-block;width:auto;padding:10px 24px;text-decoration:none;">
-            Ir al catÃ¡logo
+            Ir al catálogo
           </a>
         </div>
       `;
@@ -187,21 +187,21 @@ async function cargarPedidos() {
           <div class="pedido-card-main">
             <div class="pedido-info">
               <h3>${escaparHTML(pedido.codigo || `Pedido #${pedido.id}`)}</h3>
-              <p>ðŸ“¦ Productos: ${escaparHTML(pedido.productos)}</p>
-              <p>ðŸ“… Fecha: ${formatearFecha(pedido.created_at)}</p>
-              <p>ðŸ’° Total: <b>$${parseFloat(pedido.total).toFixed(2)}</b></p>
-              ${pedido.metodo_pago ? `<p>ðŸ’³ Pago: ${escaparHTML(pedido.metodo_pago_texto || metodoPagoTexto(pedido.metodo_pago))}</p>` : ''}
-              ${pedido.metodo_pago === 'transferencia' && pedido.comprobante_transferencia ? `<p>ðŸ¦ Comprobante: ${escaparHTML(pedido.comprobante_transferencia)}${pedido.banco_transferencia ? ` Â· ${escaparHTML(pedido.banco_transferencia)}` : ''}</p>` : ''}
-              ${entregaCompleta ? `<p>ðŸ“ Entrega: ${escaparHTML(entregaCompleta)}</p>` : ''}
-              ${pedido.referencia_entrega ? `<p>ðŸ“ Referencia: ${escaparHTML(pedido.referencia_entrega)}</p>` : ''}
-              ${enlaceMapaEntrega(pedido) ? `<p>ðŸ—ºï¸ UbicaciÃ³n aproximada: <a class="link-mapa-entrega" href="${enlaceMapaEntrega(pedido)}" target="_blank" rel="noopener">Ver en Google Maps</a></p>` : ''}
+              <p>📦 Productos: ${escaparHTML(pedido.productos)}</p>
+              <p>📅 Fecha: ${formatearFecha(pedido.created_at)}</p>
+              <p>💰 Total: <b>$${parseFloat(pedido.total).toFixed(2)}</b></p>
+              ${pedido.metodo_pago ? `<p>💳 Pago: ${escaparHTML(pedido.metodo_pago_texto || metodoPagoTexto(pedido.metodo_pago))}</p>` : ''}
+              ${pedido.metodo_pago === 'transferencia' && pedido.comprobante_transferencia ? `<p>🏦 Comprobante: ${escaparHTML(pedido.comprobante_transferencia)}${pedido.banco_transferencia ? ` · ${escaparHTML(pedido.banco_transferencia)}` : ''}</p>` : ''}
+              ${entregaCompleta ? `<p>📍 Entrega: ${escaparHTML(entregaCompleta)}</p>` : ''}
+              ${pedido.referencia_entrega ? `<p>📝 Referencia: ${escaparHTML(pedido.referencia_entrega)}</p>` : ''}
+              ${enlaceMapaEntrega(pedido) ? `<p>🗺️ Ubicación aproximada: <a class="link-mapa-entrega" href="${enlaceMapaEntrega(pedido)}" target="_blank" rel="noopener">Ver en Google Maps</a></p>` : ''}
             </div>
 
             <span class="estado ${escaparHTML(pedido.estado)}">${estadoTexto(pedido.estado)}</span>
           </div>
 
           <div class="seguimiento-pedido">
-            <h4>Seguimiento del envÃ­o</h4>
+            <h4>Seguimiento del envío</h4>
             ${renderSeguimiento(pedido)}
           </div>
 
@@ -216,7 +216,7 @@ async function cargarPedidos() {
 }
 
 // ================================
-// HU-27: Solicitar cancelaciÃ³n de pedido
+// HU-27: Solicitar cancelación de pedido
 // ================================
 async function solicitarCancelacion(pedidoId) {
   const token = localStorage.getItem('token');
@@ -224,10 +224,10 @@ async function solicitarCancelacion(pedidoId) {
 
   if (typeof sfPrompt === 'function') {
     motivo = await sfPrompt({
-      icono: 'ðŸ“¦',
-      titulo: 'Solicitar cancelaciÃ³n',
-      descripcion: 'Indica brevemente por quÃ© deseas cancelar este pedido. El vendedor recibirÃ¡ la solicitud y podrÃ¡ aprobarla o rechazarla.',
-      placeholder: 'Ejemplo: Me equivoquÃ© de producto o ya no necesito el pedido...',
+      icono: '📦',
+      titulo: 'Solicitar cancelación',
+      descripcion: 'Indica brevemente por qué deseas cancelar este pedido. El vendedor recibirá la solicitud y podrá aprobarla o rechazarla.',
+      placeholder: 'Ejemplo: Me equivoqué de producto o ya no necesito el pedido...',
       textoAceptar: 'Enviar solicitud',
       requerido: true,
       minimo: 4,
@@ -235,7 +235,7 @@ async function solicitarCancelacion(pedidoId) {
     });
 
     if (!motivo) {
-      mostrarAviso('Solicitud cancelada', 'info', 'No se enviÃ³ ninguna solicitud al vendedor.');
+      mostrarAviso('Solicitud cancelada', 'info', 'No se envió ninguna solicitud al vendedor.');
       return;
     }
   } else {
@@ -255,15 +255,14 @@ async function solicitarCancelacion(pedidoId) {
     const data = await res.json();
 
     if (res.ok) {
-      mostrarAviso('Solicitud enviada', 'exito', 'El vendedor recibirÃ¡ una notificaciÃ³n para revisar la cancelaciÃ³n.');
+      mostrarAviso('Solicitud enviada', 'exito', 'El vendedor recibirá una notificación para revisar la cancelación.');
       if (typeof sfActualizarNotificaciones === 'function') sfActualizarNotificaciones(false);
       cargarPedidos();
     } else {
-      mostrarAviso(data.error || 'No se pudo solicitar la cancelaciÃ³n', 'error');
+      mostrarAviso(data.error || 'No se pudo solicitar la cancelación', 'error');
     }
   } catch (error) {
     console.error(error);
     mostrarAviso('Error al conectar con el servidor', 'error');
   }
 }
-

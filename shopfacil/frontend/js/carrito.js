@@ -1,35 +1,35 @@
-﻿const API_URL = window.SHOPFACIL_API_URL || "https://shopfacil-api.onrender.com/api";
+const API_CARRITO = window.SHOPFACIL_API_URL || 'http://localhost:3000/api';
 const IVA_ECUADOR = 0.15;
 
 const CIUDADES_POR_PROVINCIA = {
-  'Azuay': ['Cuenca', 'GirÃ³n', 'Gualaceo', 'NabÃ³n', 'Paute', 'PucarÃ¡', 'San Fernando', 'Santa Isabel', 'Sigsig', 'OÃ±a', 'Chordeleg', 'El Pan', 'Sevilla de Oro', 'Guachapala', 'Camilo Ponce EnrÃ­quez'],
-  'BolÃ­var': ['Guaranda', 'Chillanes', 'Chimbo', 'EcheandÃ­a', 'San Miguel', 'Caluma', 'Las Naves'],
-  'CaÃ±ar': ['Azogues', 'BibliÃ¡n', 'CaÃ±ar', 'La Troncal', 'El Tambo', 'DÃ©leg', 'Suscal'],
-  'Carchi': ['TulcÃ¡n', 'BolÃ­var', 'Espejo', 'Mira', 'MontÃºfar', 'San Pedro de Huaca'],
-  'Chimborazo': ['Riobamba', 'AlausÃ­', 'Colta', 'Chambo', 'Chunchi', 'Guamote', 'Guano', 'Pallatanga', 'Penipe', 'CumandÃ¡'],
-  'Cotopaxi': ['Latacunga', 'La ManÃ¡', 'Pangua', 'PujilÃ­', 'Salcedo', 'SaquisilÃ­', 'Sigchos'],
-  'El Oro': ['Machala', 'Arenillas', 'Atahualpa', 'Balsas', 'Chilla', 'El Guabo', 'Huaquillas', 'MarcabelÃ­', 'Pasaje', 'PiÃ±as', 'Portovelo', 'Santa Rosa', 'Zaruma', 'Las Lajas'],
-  'Esmeraldas': ['Esmeraldas', 'Eloy Alfaro', 'Muisne', 'QuinindÃ©', 'San Lorenzo', 'Atacames', 'Rioverde'],
-  'GalÃ¡pagos': ['San CristÃ³bal', 'Isabela', 'Santa Cruz'],
-  'Guayas': ['Guayaquil', 'Alfredo Baquerizo Moreno', 'Balao', 'Balzar', 'Colimes', 'Daule', 'DurÃ¡n', 'El Empalme', 'El Triunfo', 'Milagro', 'Naranjal', 'Naranjito', 'Palestina', 'Pedro Carbo', 'SamborondÃ³n', 'Santa LucÃ­a', 'Salitre', 'San Jacinto de Yaguachi', 'Playas', 'SimÃ³n BolÃ­var', 'Coronel Marcelino MaridueÃ±a', 'Lomas de Sargentillo', 'Nobol', 'General Antonio Elizalde', 'Isidro Ayora'],
-  'Imbabura': ['Ibarra', 'Antonio Ante', 'Cotacachi', 'Otavalo', 'Pimampiro', 'San Miguel de UrcuquÃ­'],
-  'Loja': ['Loja', 'Calvas', 'Catamayo', 'Celica', 'Chaguarpamba', 'EspÃ­ndola', 'GonzanamÃ¡', 'MacarÃ¡', 'Paltas', 'Puyango', 'Saraguro', 'Sozoranga', 'Zapotillo', 'Pindal', 'Quilanga', 'Olmedo'],
-  'Los RÃ­os': ['Babahoyo', 'Baba', 'Montalvo', 'Puebloviejo', 'Quevedo', 'Urdaneta', 'Ventanas', 'Vinces', 'Palenque', 'Buena Fe', 'Valencia', 'Mocache', 'Quinsaloma'],
-  'ManabÃ­': ['Portoviejo', 'BolÃ­var', 'Chone', 'El Carmen', 'Flavio Alfaro', 'Jipijapa', 'JunÃ­n', 'Manta', 'Montecristi', 'PajÃ¡n', 'Pichincha', 'Rocafuerte', 'Santa Ana', 'Sucre', 'Tosagua', '24 de Mayo', 'Pedernales', 'Olmedo', 'Puerto LÃ³pez', 'Jama', 'JaramijÃ³', 'San Vicente'],
-  'Morona Santiago': ['Morona', 'Gualaquiza', 'LimÃ³n Indanza', 'Palora', 'Santiago', 'SucÃºa', 'Huamboya', 'San Juan Bosco', 'Taisha', 'LogroÃ±o', 'Pablo Sexto', 'Tiwintza'],
+  'Azuay': ['Cuenca', 'Girón', 'Gualaceo', 'Nabón', 'Paute', 'Pucará', 'San Fernando', 'Santa Isabel', 'Sigsig', 'Oña', 'Chordeleg', 'El Pan', 'Sevilla de Oro', 'Guachapala', 'Camilo Ponce Enríquez'],
+  'Bolívar': ['Guaranda', 'Chillanes', 'Chimbo', 'Echeandía', 'San Miguel', 'Caluma', 'Las Naves'],
+  'Cañar': ['Azogues', 'Biblián', 'Cañar', 'La Troncal', 'El Tambo', 'Déleg', 'Suscal'],
+  'Carchi': ['Tulcán', 'Bolívar', 'Espejo', 'Mira', 'Montúfar', 'San Pedro de Huaca'],
+  'Chimborazo': ['Riobamba', 'Alausí', 'Colta', 'Chambo', 'Chunchi', 'Guamote', 'Guano', 'Pallatanga', 'Penipe', 'Cumandá'],
+  'Cotopaxi': ['Latacunga', 'La Maná', 'Pangua', 'Pujilí', 'Salcedo', 'Saquisilí', 'Sigchos'],
+  'El Oro': ['Machala', 'Arenillas', 'Atahualpa', 'Balsas', 'Chilla', 'El Guabo', 'Huaquillas', 'Marcabelí', 'Pasaje', 'Piñas', 'Portovelo', 'Santa Rosa', 'Zaruma', 'Las Lajas'],
+  'Esmeraldas': ['Esmeraldas', 'Eloy Alfaro', 'Muisne', 'Quinindé', 'San Lorenzo', 'Atacames', 'Rioverde'],
+  'Galápagos': ['San Cristóbal', 'Isabela', 'Santa Cruz'],
+  'Guayas': ['Guayaquil', 'Alfredo Baquerizo Moreno', 'Balao', 'Balzar', 'Colimes', 'Daule', 'Durán', 'El Empalme', 'El Triunfo', 'Milagro', 'Naranjal', 'Naranjito', 'Palestina', 'Pedro Carbo', 'Samborondón', 'Santa Lucía', 'Salitre', 'San Jacinto de Yaguachi', 'Playas', 'Simón Bolívar', 'Coronel Marcelino Maridueña', 'Lomas de Sargentillo', 'Nobol', 'General Antonio Elizalde', 'Isidro Ayora'],
+  'Imbabura': ['Ibarra', 'Antonio Ante', 'Cotacachi', 'Otavalo', 'Pimampiro', 'San Miguel de Urcuquí'],
+  'Loja': ['Loja', 'Calvas', 'Catamayo', 'Celica', 'Chaguarpamba', 'Espíndola', 'Gonzanamá', 'Macará', 'Paltas', 'Puyango', 'Saraguro', 'Sozoranga', 'Zapotillo', 'Pindal', 'Quilanga', 'Olmedo'],
+  'Los Ríos': ['Babahoyo', 'Baba', 'Montalvo', 'Puebloviejo', 'Quevedo', 'Urdaneta', 'Ventanas', 'Vinces', 'Palenque', 'Buena Fe', 'Valencia', 'Mocache', 'Quinsaloma'],
+  'Manabí': ['Portoviejo', 'Bolívar', 'Chone', 'El Carmen', 'Flavio Alfaro', 'Jipijapa', 'Junín', 'Manta', 'Montecristi', 'Paján', 'Pichincha', 'Rocafuerte', 'Santa Ana', 'Sucre', 'Tosagua', '24 de Mayo', 'Pedernales', 'Olmedo', 'Puerto López', 'Jama', 'Jaramijó', 'San Vicente'],
+  'Morona Santiago': ['Morona', 'Gualaquiza', 'Limón Indanza', 'Palora', 'Santiago', 'Sucúa', 'Huamboya', 'San Juan Bosco', 'Taisha', 'Logroño', 'Pablo Sexto', 'Tiwintza'],
   'Napo': ['Tena', 'Archidona', 'El Chaco', 'Quijos', 'Carlos Julio Arosemena Tola'],
   'Orellana': ['Francisco de Orellana', 'Aguarico', 'La Joya de los Sachas', 'Loreto'],
   'Pastaza': ['Pastaza', 'Mera', 'Santa Clara', 'Arajuno'],
-  'Pichincha': ['Quito', 'Cayambe', 'MejÃ­a', 'Pedro Moncayo', 'RumiÃ±ahui', 'San Miguel de los Bancos', 'Pedro Vicente Maldonado', 'Puerto Quito'],
+  'Pichincha': ['Quito', 'Cayambe', 'Mejía', 'Pedro Moncayo', 'Rumiñahui', 'San Miguel de los Bancos', 'Pedro Vicente Maldonado', 'Puerto Quito'],
   'Santa Elena': ['Santa Elena', 'La Libertad', 'Salinas'],
-  'Santo Domingo de los TsÃ¡chilas': ['Santo Domingo', 'La Concordia'],
-  'SucumbÃ­os': ['Lago Agrio', 'Gonzalo Pizarro', 'Putumayo', 'Shushufindi', 'SucumbÃ­os', 'Cascales', 'Cuyabeno'],
-  'Tungurahua': ['Ambato', 'BaÃ±os de Agua Santa', 'Cevallos', 'Mocha', 'Patate', 'Quero', 'San Pedro de Pelileo', 'Santiago de PÃ­llaro', 'Tisaleo'],
-  'Zamora Chinchipe': ['Zamora', 'Chinchipe', 'Nangaritza', 'Yacuambi', 'Yantzaza', 'El Pangui', 'Centinela del CÃ³ndor', 'Palanda', 'Paquisha']
+  'Santo Domingo de los Tsáchilas': ['Santo Domingo', 'La Concordia'],
+  'Sucumbíos': ['Lago Agrio', 'Gonzalo Pizarro', 'Putumayo', 'Shushufindi', 'Sucumbíos', 'Cascales', 'Cuyabeno'],
+  'Tungurahua': ['Ambato', 'Baños de Agua Santa', 'Cevallos', 'Mocha', 'Patate', 'Quero', 'San Pedro de Pelileo', 'Santiago de Píllaro', 'Tisaleo'],
+  'Zamora Chinchipe': ['Zamora', 'Chinchipe', 'Nangaritza', 'Yacuambi', 'Yantzaza', 'El Pangui', 'Centinela del Cóndor', 'Palanda', 'Paquisha']
 };
 
 
-// HU-22: direcciÃ³n de entrega. La ubicaciÃ³n por mapa se dejÃ³ opcional para no bloquear compras.
+// HU-22: dirección de entrega. La ubicación por mapa se dejó opcional para no bloquear compras.
 let ubicacionSeleccionada = { latitud: null, longitud: null };
 
 window.onload = function () {
@@ -37,7 +37,7 @@ window.onload = function () {
   const token = localStorage.getItem('token');
 
   if (!usuario || !token) {
-    alert('Debes iniciar sesiÃ³n para ver el carrito');
+    alert('Debes iniciar sesión para ver el carrito');
     window.location.href = 'login.html';
     return;
   }
@@ -45,10 +45,10 @@ window.onload = function () {
   if (usuario.rol !== 'comprador') {
     document.getElementById('contenido-carrito').innerHTML = `
       <div class="vacio">
-        <p style="font-size:48px;">ðŸ›’</p>
+        <p style="font-size:48px;">🛒</p>
         <h3>El carrito es solo para compradores</h3>
-        <p>Inicia sesiÃ³n con una cuenta de comprador para realizar compras.</p>
-        <a href="index.html" class="btn" style="display:inline-block;width:auto;padding:10px 24px;text-decoration:none;">Volver al catÃ¡logo</a>
+        <p>Inicia sesión con una cuenta de comprador para realizar compras.</p>
+        <a href="index.html" class="btn" style="display:inline-block;width:auto;padding:10px 24px;text-decoration:none;">Volver al catálogo</a>
       </div>
     `;
     return;
@@ -59,19 +59,19 @@ window.onload = function () {
 
 function corregirTexto(texto) {
   return String(texto ?? '')
-    .replaceAll('ÃƒÂ¡', 'Ã¡')
-    .replaceAll('ÃƒÂ©', 'Ã©')
-    .replaceAll('ÃƒÂ­', 'Ã­')
-    .replaceAll('ÃƒÂ³', 'Ã³')
-    .replaceAll('ÃƒÂº', 'Ãº')
-    .replaceAll('ÃƒÂ±', 'Ã±')
-    .replaceAll('ÃƒÅ¡', 'Ãš')
-    .replaceAll('PantalÃƒÂ³n', 'PantalÃ³n')
-    .replaceAll('algodÃƒÂ³n', 'algodÃ³n')
-    .replaceAll('niÃƒÂ±os', 'niÃ±os')
-    .replaceAll('aÃƒÂ±os', 'aÃ±os')
-    .replaceAll('CafÃƒÂ©', 'CafÃ©')
-    .replaceAll('ShopFÃƒÂ¡cil', 'ShopFÃ¡cil');
+    .replaceAll('Ã¡', 'á')
+    .replaceAll('Ã©', 'é')
+    .replaceAll('Ã­', 'í')
+    .replaceAll('Ã³', 'ó')
+    .replaceAll('Ãº', 'ú')
+    .replaceAll('Ã±', 'ñ')
+    .replaceAll('Ãš', 'Ú')
+    .replaceAll('PantalÃ³n', 'Pantalón')
+    .replaceAll('algodÃ³n', 'algodón')
+    .replaceAll('niÃ±os', 'niños')
+    .replaceAll('aÃ±os', 'años')
+    .replaceAll('CafÃ©', 'Café')
+    .replaceAll('ShopFÃ¡cil', 'ShopFácil');
 }
 
 function escaparHTML(texto) {
@@ -115,11 +115,11 @@ async function cargarCarrito() {
     if (data.items.length === 0) {
       div.innerHTML = `
         <div class="vacio">
-          <p style="font-size:48px;">ðŸ›’</p>
-          <h3>Tu carrito estÃ¡ vacÃ­o</h3>
-          <p>Agrega productos desde el catÃ¡logo.</p>
+          <p style="font-size:48px;">🛒</p>
+          <h3>Tu carrito está vacío</h3>
+          <p>Agrega productos desde el catálogo.</p>
           <a href="index.html" class="btn" style="display:inline-block;width:auto;padding:10px 24px;text-decoration:none;">
-            Ver catÃ¡logo
+            Ver catálogo
           </a>
         </div>
       `;
@@ -138,7 +138,7 @@ async function cargarCarrito() {
             <th>Precio unit.</th>
             <th>Cantidad</th>
             <th>Subtotal</th>
-            <th>AcciÃ³n</th>
+            <th>Acción</th>
           </tr>
         </thead>
         <tbody>
@@ -175,8 +175,8 @@ async function cargarCarrito() {
       <div class="checkout-card">
         <div class="checkout-header">
           <div>
-            <h3>ðŸ“ Datos de entrega</h3>
-            <p>Completa la informaciÃ³n para que el vendedor pueda preparar el envÃ­o.</p>
+            <h3>📍 Datos de entrega</h3>
+            <p>Completa la información para que el vendedor pueda preparar el envío.</p>
           </div>
           <span class="checkout-badge">Sprint 4</span>
         </div>
@@ -189,14 +189,14 @@ async function cargarCarrito() {
             </select>
           </div>
           <div class="checkout-field">
-            <label>Ciudad / CantÃ³n</label>
+            <label>Ciudad / Cantón</label>
             <select id="entrega-ciudad" disabled>
               <option value="">Primero selecciona una provincia</option>
             </select>
           </div>
           <div class="checkout-field checkout-full">
-            <label>DirecciÃ³n exacta</label>
-            <input type="text" id="entrega-direccion" placeholder="Calle principal, nÃºmero, sector">
+            <label>Dirección exacta</label>
+            <input type="text" id="entrega-direccion" placeholder="Calle principal, número, sector">
           </div>
           <div class="checkout-field checkout-full">
             <label>Referencia</label>
@@ -207,16 +207,16 @@ async function cargarCarrito() {
 
         <div class="checkout-header checkout-header-secondary">
           <div>
-            <h3>ðŸ’³ MÃ©todo de pago simulado</h3>
-            <p>Para fines acadÃ©micos no se realiza un cobro real.</p>
+            <h3>💳 Método de pago simulado</h3>
+            <p>Para fines académicos no se realiza un cobro real.</p>
           </div>
         </div>
 
         <div class="checkout-grid">
           <div class="checkout-field checkout-full">
-            <label>MÃ©todo de pago</label>
+            <label>Método de pago</label>
             <select id="metodo-pago" onchange="mostrarCamposPago()">
-              <option value="">Selecciona una opciÃ³n</option>
+              <option value="">Selecciona una opción</option>
               <option value="contra_entrega">Pago contra entrega</option>
               <option value="transferencia">Transferencia bancaria</option>
               <option value="tarjeta_simulada">Tarjeta simulada</option>
@@ -229,11 +229,11 @@ async function cargarCarrito() {
             <div class="transferencia-info">
               <h4>Datos para transferencia simulada</h4>
               <p><strong>Banco:</strong> Banco Pichincha</p>
-              <p><strong>Titular:</strong> ShopFÃ¡cil Demo</p>
+              <p><strong>Titular:</strong> ShopFácil Demo</p>
               <p><strong>Tipo de cuenta:</strong> Corriente</p>
-              <p><strong>NÃºmero de cuenta:</strong> 2200456789</p>
+              <p><strong>Número de cuenta:</strong> 2200456789</p>
               <p><strong>RUC:</strong> 1799999999001</p>
-              <small>Este pago es simulado para fines acadÃ©micos. No realices transferencias reales.</small>
+              <small>Este pago es simulado para fines académicos. No realices transferencias reales.</small>
             </div>
           </div>
           <div class="checkout-field">
@@ -241,7 +241,7 @@ async function cargarCarrito() {
             <input type="text" id="transferencia-banco" placeholder="Ej: Banco Pichincha">
           </div>
           <div class="checkout-field">
-            <label>NÃºmero de comprobante</label>
+            <label>Número de comprobante</label>
             <input type="text" id="transferencia-comprobante" placeholder="Ej: TRX-2026-001">
           </div>
         </div>
@@ -252,11 +252,11 @@ async function cargarCarrito() {
             <input type="text" id="tarjeta-titular" placeholder="Ej: Shirley Maldonado">
           </div>
           <div class="checkout-field">
-            <label>NÃºmero de tarjeta</label>
+            <label>Número de tarjeta</label>
             <input type="text" id="tarjeta-numero" maxlength="19" placeholder="4111111111111111">
           </div>
           <div class="checkout-field">
-            <label>ExpiraciÃ³n</label>
+            <label>Expiración</label>
             <input type="text" id="tarjeta-expiracion" maxlength="5" placeholder="MM/AA">
           </div>
           <div class="checkout-field">
@@ -286,7 +286,7 @@ async function cargarCarrito() {
             </div>
           </div>
           <button class="btn-confirmar" onclick="confirmarPedido()">
-            Confirmar pedido âœ“
+            Confirmar pedido ✓
           </button>
         </div>
       </div>
@@ -340,7 +340,7 @@ function cargarCiudadesPorProvincia() {
   }
 
   ciudadSelect.disabled = false;
-  ciudadSelect.innerHTML = '<option value="">Selecciona una ciudad o cantÃ³n</option>';
+  ciudadSelect.innerHTML = '<option value="">Selecciona una ciudad o cantón</option>';
 
   ciudades
     .sort((a, b) => a.localeCompare(b, 'es'))
@@ -396,16 +396,16 @@ function obtenerDatosCheckout() {
 function validarCheckoutFrontend(datos) {
   if (!datos.entrega.provincia) return 'Completa la provincia de entrega';
   if (!datos.entrega.ciudad) return 'Completa la ciudad de entrega';
-  if (!datos.entrega.direccion) return 'Completa la direcciÃ³n exacta de entrega';
+  if (!datos.entrega.direccion) return 'Completa la dirección exacta de entrega';
   if (!datos.entrega.referencia) return 'Completa una referencia de entrega';
 
   if (!datos.metodo_pago) {
-    return 'Selecciona un mÃ©todo de pago';
+    return 'Selecciona un método de pago';
   }
 
   if (datos.metodo_pago === 'transferencia') {
     if (!datos.transferencia_simulada.comprobante || datos.transferencia_simulada.comprobante.length < 4) {
-      return 'Ingresa el nÃºmero de comprobante de la transferencia simulada';
+      return 'Ingresa el número de comprobante de la transferencia simulada';
     }
   }
 
@@ -443,7 +443,7 @@ function mostrarMensajeCarrito(mensaje, tipo = 'info', subtexto = '') {
   setTimeout(() => toast.remove(), 3800);
 }
 
-// La ubicaciÃ³n por mapa queda opcional. Para este Sprint se guarda solo direcciÃ³n escrita.
+// La ubicación por mapa queda opcional. Para este Sprint se guarda solo dirección escrita.
 
 // ================================
 // HU-08: Actualizar cantidad
@@ -520,19 +520,19 @@ async function confirmarPedido() {
     if (res.ok) {
       guardarFactura(data, usuario);
 
-      mostrarMensajeCarrito('Â¡Compra confirmada en ShopFÃ¡cil!', 'exito', `${data.codigo} Â· ${pagoTexto(data.metodo_pago)}`);
+      mostrarMensajeCarrito('¡Compra confirmada en ShopFácil!', 'exito', `${data.codigo} · ${pagoTexto(data.metodo_pago)}`);
 
       document.getElementById('contenido-carrito').innerHTML = `
         <div class="vacio" style="padding:50px 20px;">
-          <div style="font-size:60px;margin-bottom:12px;">âœ…</div>
-          <h3 style="color:#1F4E79;font-size:24px;margin-bottom:8px;">Â¡Pedido confirmado!</h3>
-          <p style="font-size:16px;color:#555;margin-bottom:4px;">NÃºmero de pedido:</p>
+          <div style="font-size:60px;margin-bottom:12px;">✅</div>
+          <h3 style="color:#1F4E79;font-size:24px;margin-bottom:8px;">¡Pedido confirmado!</h3>
+          <p style="font-size:16px;color:#555;margin-bottom:4px;">Número de pedido:</p>
           <h2 style="color:#1F4E79;font-size:28px;margin-bottom:12px;">${escaparHTML(data.codigo)}</h2>
 
           <div style="background:#f7fafc;border:1px solid #e0e7f0;border-radius:12px;padding:18px 24px;display:inline-block;text-align:left;margin-bottom:22px;">
             <div style="font-size:13px;color:#64748b;margin-bottom:8px;text-transform:uppercase;letter-spacing:0.04em;font-weight:600;">Resumen de compra</div>
             <div style="font-size:14px;color:#555;margin-bottom:4px;"><b>Entrega:</b> ${escaparHTML(data.entrega.ciudad)}, ${escaparHTML(data.entrega.provincia)}</div>
-            ${data.entrega.latitud && data.entrega.longitud ? `<div style="font-size:14px;color:#555;margin-bottom:4px;"><b>UbicaciÃ³n:</b> punto guardado en mapa</div>` : ''}
+            ${data.entrega.latitud && data.entrega.longitud ? `<div style="font-size:14px;color:#555;margin-bottom:4px;"><b>Ubicación:</b> punto guardado en mapa</div>` : ''}
             <div style="font-size:14px;color:#555;margin-bottom:4px;"><b>Pago:</b> ${escaparHTML(data.metodo_pago_texto)}</div>
             ${data.metodo_pago === 'transferencia' && data.transferencia?.comprobante ? `<div style="font-size:14px;color:#555;margin-bottom:4px;"><b>Comprobante:</b> ${escaparHTML(data.transferencia.comprobante)}</div>` : ''}
             <div style="display:flex;justify-content:space-between;gap:50px;font-size:14px;color:#555;margin-bottom:4px;margin-top:10px;">
@@ -563,7 +563,7 @@ async function confirmarPedido() {
       mostrarMensajeCarrito(data.error || 'Error al confirmar pedido', 'error', data.detalle || 'Revisa los datos de entrega, pago y stock disponible.');
     }
   } catch (error) {
-    mostrarMensajeCarrito('No se pudo conectar con el servidor', 'error', 'Verifica que Docker y el backend estÃ©n encendidos.');
+    mostrarMensajeCarrito('No se pudo conectar con el servidor', 'error', 'Verifica que Docker y el backend estén encendidos.');
   }
 }
 
@@ -599,4 +599,3 @@ function guardarFactura(pedidoData, usuario) {
     console.warn('No se pudo guardar la factura en localStorage', e);
   }
 }
-

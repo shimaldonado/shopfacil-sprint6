@@ -1,10 +1,10 @@
-﻿var IVA_ECUADOR = 0.15;
+var IVA_ECUADOR = 0.15;
 
 window.onload = function () {
   var usuario = JSON.parse(localStorage.getItem('usuario') || 'null');
   var token = localStorage.getItem('token');
   if (!usuario || !token) {
-    alert('Debes iniciar sesiÃ³n para ver tus facturas');
+    alert('Debes iniciar sesión para ver tus facturas');
     window.location.href = 'login.html';
     return;
   }
@@ -26,7 +26,7 @@ function padNum(n, len) {
 }
 
 function fmtFecha(iso) {
-  if (!iso) return 'â€”';
+  if (!iso) return '—';
   var d = new Date(iso);
   return d.toLocaleDateString('es-EC', { year: 'numeric', month: 'long', day: 'numeric' });
 }
@@ -52,7 +52,7 @@ function metodoPagoFactura(metodo) {
 async function cargarFacturas(usuario, token) {
   var div = document.getElementById('lista-facturas');
   try {
-    var res = await fetch((window.SHOPFACIL_API_URL || 'https://shopfacil-api.onrender.com/api') + '/pedidos/mis-pedidos', {
+    var res = await fetch((window.SHOPFACIL_API_URL || 'http://localhost:3000/api') + '/pedidos/mis-pedidos', {
       headers: { 'Authorization': 'Bearer ' + token }
     });
     var pedidos = await res.json();
@@ -75,7 +75,7 @@ async function cargarFacturas(usuario, token) {
     div.innerHTML = html;
 
   } catch (err) {
-    div.innerHTML = '<div class="fac-vacio"><div class="fac-vacio-icon">&#128683;</div><h3>Error de conexiÃ³n</h3><p>No se pudo conectar con el servidor.</p></div>';
+    div.innerHTML = '<div class="fac-vacio"><div class="fac-vacio-icon">&#128683;</div><h3>Error de conexión</h3><p>No se pudo conectar con el servidor.</p></div>';
   }
 }
 
@@ -121,8 +121,8 @@ function tarjetaFactura(pedido, usuario, idx) {
 
       '<div class="fac-cab">' +
         '<div class="fac-cab-logo">' +
-          '<div class="fac-cab-logo-text">&#128722; ShopFÃ¡cil</div>' +
-          '<div class="fac-cab-logo-sub">Plataforma de comercio electrÃ³nico &middot; Ecuador</div>' +
+          '<div class="fac-cab-logo-text">&#128722; ShopFácil</div>' +
+          '<div class="fac-cab-logo-sub">Plataforma de comercio electrónico &middot; Ecuador</div>' +
         '</div>' +
         '<div class="fac-cab-right">' +
           '<div class="fac-cab-num">' + esc(numFac) + '</div>' +
@@ -137,7 +137,7 @@ function tarjetaFactura(pedido, usuario, idx) {
           (correo ? '<div class="fac-dato-sub">' + correo + '</div>' : '') +
         '</div>' +
         '<div class="fac-dato">' +
-          '<div class="fac-dato-label">Fecha de emisiÃ³n</div>' +
+          '<div class="fac-dato-label">Fecha de emisión</div>' +
           '<div class="fac-dato-val">' + fechaStr + '</div>' +
           '<div class="fac-dato-sub">' + horaStr + '</div>' +
         '</div>' +
@@ -191,9 +191,9 @@ function vacioHTML() {
   return (
     '<div class="fac-vacio">' +
       '<div class="fac-vacio-icon">&#129534;</div>' +
-      '<h3>AÃºn no tienes facturas</h3>' +
-      '<p>Cuando confirmes una compra, tu factura aparecerÃ¡ aquÃ­ automÃ¡ticamente.</p>' +
-      '<a href="index.html" class="btn" style="display:inline-block;width:auto;padding:10px 28px;text-decoration:none;">Ir al catÃ¡logo</a>' +
+      '<h3>Aún no tienes facturas</h3>' +
+      '<p>Cuando confirmes una compra, tu factura aparecerá aquí automáticamente.</p>' +
+      '<a href="index.html" class="btn" style="display:inline-block;width:auto;padding:10px 28px;text-decoration:none;">Ir al catálogo</a>' +
     '</div>'
   );
 }

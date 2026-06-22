@@ -1,17 +1,17 @@
-﻿const API_NOTIFICACIONES = window.SHOPFACIL_API_URL || 'https://shopfacil-api.onrender.com/api';
+const API_NOTIFICACIONES = window.SHOPFACIL_API_URL || 'http://localhost:3000/api';
 
 window.onload = function () {
   const usuario = JSON.parse(localStorage.getItem('usuario'));
   const token = localStorage.getItem('token');
 
   if (!usuario || !token) {
-    alert('Debes iniciar sesiÃ³n para ver tus notificaciones');
+    alert('Debes iniciar sesión para ver tus notificaciones');
     window.location.href = 'login.html';
     return;
   }
 
   if (!['comprador', 'vendedor'].includes(usuario.rol)) {
-    mostrarAviso('Las notificaciones estÃ¡n disponibles para compradores y vendedores', 'error');
+    mostrarAviso('Las notificaciones están disponibles para compradores y vendedores', 'error');
     window.location.href = 'index.html';
     return;
   }
@@ -53,20 +53,20 @@ function configurarNavbarNotificaciones(usuario) {
 
   if (usuario.rol === 'vendedor') {
     nav.innerHTML = `
-      <a href="index.html">CatÃ¡logo</a>
+      <a href="index.html">Catálogo</a>
       <a href="agregar-producto.html">+ Agregar producto</a>
       <a href="panel-vendedor.html">Panel vendedor</a>
       <a href="notificaciones.html">Notificaciones</a>
-      <a href="#" onclick="cerrarSesion()">Cerrar sesiÃ³n</a>
+      <a href="#" onclick="cerrarSesion()">Cerrar sesión</a>
     `;
   } else {
     nav.innerHTML = `
-      <a href="index.html">CatÃ¡logo</a>
+      <a href="index.html">Catálogo</a>
       <a href="pedidos.html">Mis pedidos</a>
       <a href="facturas.html">Mis facturas</a>
       <a href="carrito.html">Mi carrito</a>
       <a href="notificaciones.html">Notificaciones</a>
-      <a href="#" onclick="cerrarSesion()">Cerrar sesiÃ³n</a>
+      <a href="#" onclick="cerrarSesion()">Cerrar sesión</a>
     `;
   }
 
@@ -95,22 +95,22 @@ async function cargarNotificaciones() {
     if (!Array.isArray(notificaciones) || notificaciones.length === 0) {
       contenedor.innerHTML = `
         <div class="vacio">
-          <p style="font-size:48px;">ðŸ””</p>
+          <p style="font-size:48px;">🔔</p>
           <h3>Sin notificaciones nuevas</h3>
-          <p>Cuando un pedido cambie de estado, aparecerÃ¡ aquÃ­.</p>
+          <p>Cuando un pedido cambie de estado, aparecerá aquí.</p>
         </div>`;
       return;
     }
 
     contenedor.innerHTML = notificaciones.map(n => `
       <div class="notificacion-card ${Number(n.leida) === 1 ? 'leida' : 'no-leida'}">
-        <div class="notificacion-icono">${Number(n.leida) === 1 ? 'ðŸ“­' : 'ðŸ“¬'}</div>
+        <div class="notificacion-icono">${Number(n.leida) === 1 ? '📭' : '📬'}</div>
         <div class="notificacion-body">
           <h3>${escaparHTML(n.titulo)}</h3>
           <p>${escaparHTML(n.mensaje)}</p>
           <small>${formatearFecha(n.created_at)}</small>
         </div>
-        ${Number(n.leida) === 1 ? '<span class="badge-suave">LeÃ­da</span>' : `<button class="btn-marcar-leida" onclick="marcarLeida(${n.id})">Marcar leÃ­da</button>`}
+        ${Number(n.leida) === 1 ? '<span class="badge-suave">Leída</span>' : `<button class="btn-marcar-leida" onclick="marcarLeida(${n.id})">Marcar leída</button>`}
       </div>`).join('');
   } catch (error) {
     console.error(error);
@@ -128,12 +128,12 @@ async function marcarLeida(id) {
     });
 
     if (res.ok) {
-      mostrarAviso('NotificaciÃ³n marcada como leÃ­da', 'exito');
+      mostrarAviso('Notificación marcada como leída', 'exito');
       if (typeof sfActualizarNotificaciones === 'function') sfActualizarNotificaciones(false);
       cargarNotificaciones();
     } else {
       const data = await res.json();
-      mostrarAviso(data.error || 'No se pudo marcar la notificaciÃ³n', 'error');
+      mostrarAviso(data.error || 'No se pudo marcar la notificación', 'error');
     }
   } catch (error) {
     console.error(error);
@@ -163,4 +163,3 @@ async function marcarTodasLeidas() {
     mostrarAviso('Error al conectar con el servidor', 'error');
   }
 }
-

@@ -1,6 +1,6 @@
-﻿const API_URL = window.SHOPFACIL_API_URL || "https://shopfacil-api.onrender.com/api";
+const API = window.SHOPFACIL_API_URL || 'http://localhost:3000/api';
 
-// Mostrar mensaje de error o Ã©xito
+// Mostrar mensaje de error o éxito
 function mostrarMensaje(texto, tipo) {
   const div = document.getElementById('mensaje');
   div.textContent = texto;
@@ -15,15 +15,15 @@ async function registrar() {
   const correo = document.getElementById('correo').value.trim();
   const password = document.getElementById('password').value;
 
-  // Validar campos vacÃ­os
+  // Validar campos vacíos
   if (!nombre || !correo || !password) {
     mostrarMensaje('Todos los campos son obligatorios', 'error');
     return;
   }
 
-  // Validar largo de contraseÃ±a
+  // Validar largo de contraseña
   if (password.length < 6) {
-    mostrarMensaje('La contraseÃ±a debe tener al menos 6 caracteres', 'error');
+    mostrarMensaje('La contraseña debe tener al menos 6 caracteres', 'error');
     return;
   }
 
@@ -37,7 +37,7 @@ async function registrar() {
     const data = await res.json();
 
     if (res.ok) {
-      mostrarMensaje('Â¡Cuenta creada! Redirigiendo...', 'exito');
+      mostrarMensaje('¡Cuenta creada! Redirigiendo...', 'exito');
       setTimeout(() => {
         window.location.href = 'login.html';
       }, 1500);
@@ -51,15 +51,15 @@ async function registrar() {
 }
 
 // ================================
-// HU-03: Inicio de sesiÃ³n
+// HU-03: Inicio de sesión
 // ================================
 async function login() {
   const correo = document.getElementById('correo').value.trim();
   const password = document.getElementById('password').value;
 
-  // Validar campos vacÃ­os
+  // Validar campos vacíos
   if (!correo || !password) {
-    mostrarMensaje('Correo y contraseÃ±a son obligatorios', 'error');
+    mostrarMensaje('Correo y contraseña son obligatorios', 'error');
     return;
   }
 
@@ -77,7 +77,7 @@ async function login() {
       localStorage.setItem('token', data.token);
       localStorage.setItem('usuario', JSON.stringify(data.usuario));
 
-      mostrarMensaje('Â¡Bienvenido! Redirigiendo...', 'exito');
+      mostrarMensaje('¡Bienvenido! Redirigiendo...', 'exito');
       setTimeout(() => {
         window.location.href = 'index.html';
       }, 1500);
@@ -90,7 +90,7 @@ async function login() {
   }
 }
 
-// Cerrar sesiÃ³n
+// Cerrar sesión
 function cerrarSesion() {
   localStorage.removeItem('token');
   localStorage.removeItem('usuario');

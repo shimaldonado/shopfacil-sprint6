@@ -1,4 +1,4 @@
-﻿const API_FAVORITOS = window.SHOPFACIL_API_URL || "https://shopfacil-api.onrender.com/api";
+const API_FAVORITOS = window.SHOPFACIL_API_URL || "http://localhost:3000/api";
 
 function usuarioComprador() {
   try {
@@ -56,9 +56,9 @@ async function cargarFavoritos() {
     if (!Array.isArray(favoritos) || favoritos.length === 0) {
       contenedor.innerHTML = `
   <div class="favoritos-vacio">
-    <h3>AÃºn no tienes favoritos</h3>
-    <p>Explora el catÃ¡logo y guarda los productos que quieras revisar despuÃ©s.</p>
-    <a href="index.html" class="btn-ir-catalogo">Ir al catÃ¡logo</a>
+    <h3>Aún no tienes favoritos</h3>
+    <p>Explora el catálogo y guarda los productos que quieras revisar después.</p>
+    <a href="index.html" class="btn-ir-catalogo">Ir al catálogo</a>
   </div>
 `;
       return;
@@ -73,7 +73,7 @@ async function cargarFavoritos() {
         </div>
         <div class="producto-info">
           <h3>${escaparHTML(p.nombre)}</h3>
-          <p class="producto-descripcion">${escaparHTML(p.descripcion || "Sin descripciÃ³n")}</p>
+          <p class="producto-descripcion">${escaparHTML(p.descripcion || "Sin descripción")}</p>
           <div class="precio">$${Number(p.precio || 0).toFixed(2)}</div>
           <div class="stock">Stock: ${Number(p.stock || 0)} unidades</div>
           <div class="producto-acciones">
@@ -113,4 +113,3 @@ async function quitarFavorito(productoId) {
 function verDetalle(id) {
   window.location.href = `detalle-producto.html?id=${id}`;
 }
-

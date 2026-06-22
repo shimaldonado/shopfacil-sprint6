@@ -1,4 +1,4 @@
-﻿const API_DETALLE = window.SHOPFACIL_API_URL || 'https://shopfacil-api.onrender.com/api';
+const API_DETALLE = window.SHOPFACIL_API_URL || 'http://localhost:3000/api';
 
 let productoActual = null;
 let productoFavorito = false;
@@ -8,23 +8,23 @@ function construirNavbarDetalle() {
   if (!nav) return;
 
   const usuario = JSON.parse(localStorage.getItem('usuario'));
-  let enlaces = '<a href="index.html">CatÃ¡logo</a>';
+  let enlaces = '<a href="index.html">Catálogo</a>';
 
   if (!usuario) {
-    enlaces += '<a href="login.html">Iniciar sesiÃ³n</a>';
+    enlaces += '<a href="login.html">Iniciar sesión</a>';
   } else if (usuario.rol === 'comprador') {
     enlaces += '<a href="carrito.html">Mi carrito</a>';
     enlaces += '<a href="pedidos.html">Mis pedidos</a>';
     enlaces += '<a href="notificaciones.html" class="notificacion-link">Notificaciones</a>';
-    enlaces += '<a href="#" onclick="cerrarSesion()">Cerrar sesiÃ³n</a>';
+    enlaces += '<a href="#" onclick="cerrarSesion()">Cerrar sesión</a>';
   } else if (usuario.rol === 'vendedor') {
     enlaces += '<a href="agregar-producto.html">+ Agregar producto</a>';
     enlaces += '<a href="notificaciones.html" class="notificacion-link">Notificaciones</a>';
     enlaces += '<a href="panel-vendedor.html">Panel vendedor</a>';
-    enlaces += '<a href="#" onclick="cerrarSesion()">Cerrar sesiÃ³n</a>';
+    enlaces += '<a href="#" onclick="cerrarSesion()">Cerrar sesión</a>';
   } else if (usuario.rol === 'admin') {
     enlaces += '<a href="admin.html">Panel admin</a>';
-    enlaces += '<a href="#" onclick="cerrarSesion()">Cerrar sesiÃ³n</a>';
+    enlaces += '<a href="#" onclick="cerrarSesion()">Cerrar sesión</a>';
   }
 
   nav.innerHTML = enlaces;
@@ -45,18 +45,18 @@ function corregirTexto(texto) {
   if (!texto) return '';
 
   return String(texto)
-    .replaceAll('ÃƒÂ¡', 'Ã¡')
-    .replaceAll('ÃƒÂ©', 'Ã©')
-    .replaceAll('ÃƒÂ­', 'Ã­')
-    .replaceAll('ÃƒÂ³', 'Ã³')
-    .replaceAll('ÃƒÂº', 'Ãº')
-    .replaceAll('ÃƒÂ±', 'Ã±')
-    .replaceAll('ÃƒÃ', 'Ã')
-    .replaceAll('Ãƒâ€°', 'Ã‰')
-    .replaceAll('Ãƒâ€œ', 'Ã“')
-    .replaceAll('algodÃƒÂ³n', 'algodÃ³n')
-    .replaceAll('PantalÃƒÂ³n', 'PantalÃ³n')
-    .replaceAll('descripciÃƒÂ³n', 'descripciÃ³n');
+    .replaceAll('Ã¡', 'á')
+    .replaceAll('Ã©', 'é')
+    .replaceAll('Ã­', 'í')
+    .replaceAll('Ã³', 'ó')
+    .replaceAll('Ãº', 'ú')
+    .replaceAll('Ã±', 'ñ')
+    .replaceAll('ÃÁ', 'Á')
+    .replaceAll('Ã‰', 'É')
+    .replaceAll('Ã“', 'Ó')
+    .replaceAll('algodÃ³n', 'algodón')
+    .replaceAll('PantalÃ³n', 'Pantalón')
+    .replaceAll('descripciÃ³n', 'descripción');
 }
 
 async function leerJSONSeguro(res) {
@@ -340,7 +340,7 @@ async function cargarDetalleProducto() {
             <div class="opciones-box">
               <div class="opciones-header">
                 <h4>Talla:</h4>
-                <span class="guia-tallas">ðŸ“ GuÃ­a de tallas</span>
+                <span class="guia-tallas">📏 Guía de tallas</span>
               </div>
 
               <div id="lista-tallas" class="opciones-lista"></div>
@@ -359,7 +359,7 @@ async function cargarDetalleProducto() {
 
                 <div class="detalle-acciones-compra">
                   <button class="btn-favorito-detalle ${productoFavorito ? 'activo' : ''}" onclick="toggleFavoritoDetalle(${producto.id})">
-                    ${productoFavorito ? 'â¤ï¸ Guardado en favoritos' : 'ðŸ¤ Guardar en favoritos'}
+                    ${productoFavorito ? '❤️ Guardado en favoritos' : '🤍 Guardar en favoritos'}
                   </button>
                   <button class="btn-agregar-temu" onclick="agregarAlCarrito(${producto.id})">
                     Agregar al carrito
@@ -371,46 +371,46 @@ async function cargarDetalleProducto() {
                   ${
                     usuario
                       ? 'Este producto solo puede ser agregado al carrito por compradores.'
-                      : 'Inicia sesiÃ³n como comprador para agregar este producto al carrito.'
+                      : 'Inicia sesión como comprador para agregar este producto al carrito.'
                   }
                 </div>
               `
           }
 
           <div class="beneficios-producto">
-            <p>âœ… Pagos seguros</p>
-            <p>ðŸšš Entrega gestionada por ShopFÃ¡cil</p>
-            <p>ðŸ›¡ï¸ GarantÃ­a de pedido</p>
+            <p>✅ Pagos seguros</p>
+            <p>🚚 Entrega gestionada por ShopFácil</p>
+            <p>🛡️ Garantía de pedido</p>
           </div>
 
           <div class="descripcion-completa">
-            <h3>DescripciÃ³n del producto</h3>
-            <p>${corregirTexto(producto.descripcion || 'Sin descripciÃ³n disponible.')}</p>
+            <h3>Descripción del producto</h3>
+            <p>${corregirTexto(producto.descripcion || 'Sin descripción disponible.')}</p>
           </div>
         </div>
       </div>
 
       <section class="comentarios-card">
         <div class="comentarios-header">
-          <h3>Comentarios y calificaciÃ³n</h3>
+          <h3>Comentarios y calificación</h3>
           <div id="promedio-calificacion" class="promedio-calificacion">Sin calificaciones</div>
         </div>
 
         ${puedeComprar ? `
           <div class="form-comentario">
-            <label>Tu calificaciÃ³n:</label>
+            <label>Tu calificación:</label>
             <select id="calificacion">
-              <option value="5">â­â­â­â­â­</option>
-              <option value="4">â­â­â­â­</option>
-              <option value="3">â­â­â­</option>
-              <option value="2">â­â­</option>
-              <option value="1">â­</option>
+              <option value="5">⭐⭐⭐⭐⭐</option>
+              <option value="4">⭐⭐⭐⭐</option>
+              <option value="3">⭐⭐⭐</option>
+              <option value="2">⭐⭐</option>
+              <option value="1">⭐</option>
             </select>
             <textarea id="comentario" rows="3" placeholder="Escribe tu experiencia con el producto..."></textarea>
             <button class="btn-primary" onclick="enviarComentario(${producto.id})">Publicar comentario</button>
           </div>
         ` : `
-          <p class="mensaje-info">Inicia sesiÃ³n como comprador para comentar y calificar.</p>
+          <p class="mensaje-info">Inicia sesión como comprador para comentar y calificar.</p>
         `}
 
         <div id="lista-comentarios" class="lista-comentarios">Cargando comentarios...</div>
@@ -425,11 +425,11 @@ async function cargarDetalleProducto() {
         ${puedeComprar ? `
           <div class="form-comentario">
             <label>Pregunta sobre el producto:</label>
-            <textarea id="pregunta-producto" rows="3" placeholder="Ej.: Â¿La talla es normal o viene reducida?"></textarea>
+            <textarea id="pregunta-producto" rows="3" placeholder="Ej.: ¿La talla es normal o viene reducida?"></textarea>
             <button class="btn-primary" onclick="enviarPreguntaProducto(${producto.id})">Enviar pregunta</button>
           </div>
         ` : `
-          <p class="mensaje-info">Inicia sesiÃ³n como comprador para preguntar al vendedor.</p>
+          <p class="mensaje-info">Inicia sesión como comprador para preguntar al vendedor.</p>
         `}
 
         <div id="lista-preguntas-producto" class="lista-preguntas-producto">Cargando preguntas...</div>
@@ -574,7 +574,7 @@ async function agregarAlCarrito(productoId) {
   const cantidadSelect = document.getElementById('cantidad');
 
   if (!token || !usuario) {
-    mostrarAvisoDetalle('Debes iniciar sesiÃ³n para agregar productos al carrito', 'info');
+    mostrarAvisoDetalle('Debes iniciar sesión para agregar productos al carrito', 'info');
     window.location.href = 'login.html';
     return;
   }
@@ -603,7 +603,7 @@ async function agregarAlCarrito(productoId) {
   const varianteSeleccionada = obtenerVarianteSeleccionada();
 
   if (variantes.length > 0 && !varianteSeleccionada) {
-    mostrarAvisoDetalle('La combinaciÃ³n seleccionada no estÃ¡ disponible', 'error');
+    mostrarAvisoDetalle('La combinación seleccionada no está disponible', 'error');
     return;
   }
 
@@ -613,7 +613,7 @@ async function agregarAlCarrito(productoId) {
     : Number(productoActual.stock);
 
   if (!cantidad || cantidad <= 0) {
-    mostrarAvisoDetalle('Selecciona una cantidad vÃ¡lida', 'error');
+    mostrarAvisoDetalle('Selecciona una cantidad válida', 'error');
     return;
   }
 
@@ -655,11 +655,11 @@ async function agregarAlCarrito(productoId) {
 
 
 // ================================
-// HU-20: Comentarios y calificaciÃ³n por estrellas
+// HU-20: Comentarios y calificación por estrellas
 // ================================
 function pintarEstrellas(valor) {
   const numero = Number(valor || 0);
-  return 'â­'.repeat(numero) + 'â˜†'.repeat(Math.max(0, 5 - numero));
+  return '⭐'.repeat(numero) + '☆'.repeat(Math.max(0, 5 - numero));
 }
 
 async function cargarComentariosProducto(productoId) {
@@ -679,14 +679,14 @@ async function cargarComentariosProducto(productoId) {
 
     if (comentarios.length === 0) {
       if (promedioDiv) promedioDiv.textContent = 'Sin calificaciones';
-      contenedor.innerHTML = '<p>AÃºn no hay comentarios para este producto.</p>';
+      contenedor.innerHTML = '<p>Aún no hay comentarios para este producto.</p>';
       return;
     }
 
     const promedio = comentarios.reduce((suma, c) => suma + Number(c.calificacion || 0), 0) / comentarios.length;
 
     if (promedioDiv) {
-      promedioDiv.textContent = `${promedio.toFixed(1)} / 5 â­ (${comentarios.length})`;
+      promedioDiv.textContent = `${promedio.toFixed(1)} / 5 ⭐ (${comentarios.length})`;
     }
 
     contenedor.innerHTML = comentarios.map(c => `
@@ -764,7 +764,7 @@ async function cargarPreguntasProducto(productoId) {
     }
 
     if (preguntas.length === 0) {
-      contenedor.innerHTML = '<p>AÃºn no existen preguntas sobre este producto.</p>';
+      contenedor.innerHTML = '<p>Aún no existen preguntas sobre este producto.</p>';
       return;
     }
 
@@ -775,7 +775,7 @@ async function cargarPreguntasProducto(productoId) {
           <span>${p.respuesta ? 'Respondida' : 'Pendiente'}</span>
         </div>
         <p><strong>Pregunta:</strong> ${escaparHTML(p.pregunta)}</p>
-        ${p.respuesta ? `<p class="respuesta-texto"><strong>Respuesta del vendedor:</strong> ${escaparHTML(p.respuesta)}</p>` : '<p class="respuesta-pendiente">El vendedor aÃºn no responde.</p>'}
+        ${p.respuesta ? `<p class="respuesta-texto"><strong>Respuesta del vendedor:</strong> ${escaparHTML(p.respuesta)}</p>` : '<p class="respuesta-pendiente">El vendedor aún no responde.</p>'}
       </div>
     `).join('');
   } catch (error) {
@@ -796,7 +796,7 @@ async function enviarPreguntaProducto(productoId) {
   }
 
   if (!pregunta || pregunta.length < 5) {
-    mostrarAvisoDetalle('Escribe una pregunta vÃ¡lida', 'info', 'La pregunta debe tener al menos 5 caracteres.');
+    mostrarAvisoDetalle('Escribe una pregunta válida', 'info', 'La pregunta debe tener al menos 5 caracteres.');
     return;
   }
 
@@ -825,4 +825,3 @@ async function enviarPreguntaProducto(productoId) {
     mostrarAvisoDetalle('No se pudo conectar con el servidor', 'error');
   }
 }
-
