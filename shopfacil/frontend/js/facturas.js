@@ -52,7 +52,7 @@ function metodoPagoFactura(metodo) {
 async function cargarFacturas(usuario, token) {
   var div = document.getElementById('lista-facturas');
   try {
-    var res = await fetch((window.SHOPFACIL_API_URL || 'http://localhost:3000/api') + '/pedidos/mis-pedidos', {
+    var res = await fetch((window.SHOPFACIL_API_URL || 'https://shopfacil-api.onrender.com/api') + '/pedidos/mis-pedidos', {
       headers: { 'Authorization': 'Bearer ' + token }
     });
     var pedidos = await res.json();

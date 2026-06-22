@@ -1,4 +1,4 @@
-const API_CARRITO = window.SHOPFACIL_API_URL || 'http://localhost:3000/api';
+const API_ADMIN = window.SHOPFACIL_API_URL || "https://shopfacil-api.onrender.com/api";
 const IVA_ECUADOR = 0.15;
 
 const CIUDADES_POR_PROVINCIA = {
