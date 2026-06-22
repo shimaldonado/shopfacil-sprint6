@@ -1,4 +1,5 @@
-const API_ADMIN = window.SHOPFACIL_API_URL || 'http://localhost:3000/api';
+
+const API_URL = window.SHOPFACIL_API_URL || "https://shopfacil-api.onrender.com/api";
 let usuariosCache = [];
 
 const rolLabels = {
