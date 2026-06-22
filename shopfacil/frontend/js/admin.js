@@ -1,4 +1,4 @@
-﻿//const API_ADMIN = window.SHOPFACIL_API_URL || 'https://shopfacil-api.onrender.com/api';
+﻿
 const API_URL = window.SHOPFACIL_API_URL || "https://shopfacil-api.onrender.com/api";
 let usuariosCache = [];
 
@@ -42,7 +42,7 @@ async function cargarDashboardAdmin() {
   contenedor.innerHTML = '<p class="loading-cell">Cargando reportes...</p>';
 
   try {
-    const res = await fetch(`${API_URL}/reportes/admin`, {
+    const res = await fetch(`${API_ADMIN}/reportes/admin`, {
       headers: { Authorization: `Bearer ${token}` }
     });
     const data = await res.json();
@@ -136,7 +136,7 @@ async function cargarUsuarios() {
   try {
     tbody.innerHTML = `<tr><td colspan="5" class="loading-cell">Cargando usuarios...</td></tr>`;
 
-    const res = await fetch(`${API_URL}/admin/usuarios`, {
+    const res = await fetch(`${API_ADMIN}/admin/usuarios`, {
       headers: { Authorization: `Bearer ${token}` }
     });
 
@@ -256,7 +256,7 @@ async function cambiarRol(id, rol) {
   const token = localStorage.getItem('token');
 
   try {
-    const res = await fetch(`${API_URL}/admin/usuarios/${id}/rol`, {
+    const res = await fetch(`${API_ADMIN}/admin/usuarios/${id}/rol`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -292,7 +292,7 @@ async function cambiarEstado(id, activo) {
   }
 
   try {
-    const res = await fetch(`${API_URL}/admin/usuarios/${id}/estado`, {
+    const res = await fetch(`${API_ADMIN}/admin/usuarios/${id}/estado`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -335,7 +335,7 @@ async function crearVendedor(event) {
   }
 
   try {
-    const res = await fetch(`${API_URL}/admin/vendedores`, {
+    const res = await fetch(`${API_ADMIN}/admin/vendedores`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
