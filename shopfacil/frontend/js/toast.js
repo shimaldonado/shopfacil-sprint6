@@ -233,7 +233,7 @@
     }
 
     try {
-      const res = await fetch((window.SHOPFACIL_API_URL || 'https://shopfacil-api.onrender.com/api') + '/notificaciones/contador', {
+      const res = await fetch((window.SHOPFACIL_API_URL || 'http://localhost:3000/api') + '/notificaciones/contador', {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       const data = await res.json();

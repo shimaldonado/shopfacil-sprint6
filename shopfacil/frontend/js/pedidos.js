@@ -1,5 +1,4 @@
-const API_ADMIN = window.SHOPFACIL_API_URL || "https://shopfacil-api.onrender.com/api";
-
+const API_PEDIDOS = window.SHOPFACIL_API_URL || 'http://localhost:3000/api';
 
 window.onload = function () {
   const usuario = JSON.parse(localStorage.getItem('usuario'));

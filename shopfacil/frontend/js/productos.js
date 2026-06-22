@@ -4,7 +4,8 @@
 // HU-21: Galería de imágenes del producto
 // HU-25: Subida real de imágenes con Cloudinary
 // ================================
-const API_ADMIN = window.SHOPFACIL_API_URL || "https://shopfacil-api.onrender.com/api";
+
+const API_PRODUCTOS = window.SHOPFACIL_API_URL || 'http://localhost:3000/api';
 let variantesProducto = [];
 let modoEdicionProducto = false;
 let productoEditarId = null;

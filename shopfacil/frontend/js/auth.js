@@ -1,4 +1,4 @@
-const API_ADMIN = window.SHOPFACIL_API_URL || "https://shopfacil-api.onrender.com/api";
+const API = window.SHOPFACIL_API_URL || 'http://localhost:3000/api';
 
 // Mostrar mensaje de error o éxito
 function mostrarMensaje(texto, tipo) {

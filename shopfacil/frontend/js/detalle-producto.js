@@ -1,4 +1,4 @@
-const API_ADMIN = window.SHOPFACIL_API_URL || "https://shopfacil-api.onrender.com/api";
+const API_DETALLE = window.SHOPFACIL_API_URL || 'http://localhost:3000/api';
 
 let productoActual = null;
 let productoFavorito = false;
