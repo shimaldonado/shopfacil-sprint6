@@ -1,11 +1,11 @@
-// ================================
+﻿// ================================
 // HU-06: Registrar/editar producto (vendedor)
 // HU-18: Registrar/editar variantes de producto
-// HU-21: Galería de imágenes del producto
-// HU-25: Subida real de imágenes con Cloudinary
+// HU-21: GalerÃ­a de imÃ¡genes del producto
+// HU-25: Subida real de imÃ¡genes con Cloudinary
 // ================================
 
-const API_PRODUCTOS = window.SHOPFACIL_API_URL || 'http://localhost:3000/api';
+const API_PRODUCTOS = window.SHOPFACIL_API_URL || 'https://shopfacil-api.onrender.com/api';
 let variantesProducto = [];
 let modoEdicionProducto = false;
 let productoEditarId = null;
@@ -15,13 +15,13 @@ window.onload = async function () {
   const token = localStorage.getItem('token');
 
   if (!usuario || !token) {
-    alert('Debes iniciar sesión para acceder a esta página');
+    alert('Debes iniciar sesiÃ³n para acceder a esta pÃ¡gina');
     window.location.href = 'login.html';
     return;
   }
 
   if (usuario.rol !== 'vendedor') {
-    alert('No tienes permisos para acceder a esta página');
+    alert('No tienes permisos para acceder a esta pÃ¡gina');
     window.location.href = 'index.html';
     return;
   }
@@ -98,12 +98,12 @@ async function subirImagenesCloudinary() {
   const archivos = input?.files || [];
 
   if (archivos.length === 0) {
-    mostrarMensaje('Selecciona una o varias imágenes para subir', 'error');
+    mostrarMensaje('Selecciona una o varias imÃ¡genes para subir', 'error');
     return;
   }
 
   if (archivos.length > 6) {
-    mostrarMensaje('Puedes subir máximo 6 imágenes por producto', 'error');
+    mostrarMensaje('Puedes subir mÃ¡ximo 6 imÃ¡genes por producto', 'error');
     return;
   }
 
@@ -114,14 +114,14 @@ async function subirImagenesCloudinary() {
       return;
     }
     if (archivo.size > 3 * 1024 * 1024) {
-      mostrarMensaje('Cada imagen debe pesar máximo 3 MB', 'error');
+      mostrarMensaje('Cada imagen debe pesar mÃ¡ximo 3 MB', 'error');
       return;
     }
     formData.append('imagenes', archivo);
   }
 
   try {
-    mostrarMensaje('Subiendo imágenes a Cloudinary...', 'exito');
+    mostrarMensaje('Subiendo imÃ¡genes a Cloudinary...', 'exito');
 
     const res = await fetch(`${API_PRODUCTOS}/uploads/productos/imagenes`, {
       method: 'POST',
@@ -134,7 +134,7 @@ async function subirImagenesCloudinary() {
     const data = await leerJSONSeguroProducto(res);
 
     if (!res.ok) {
-      mostrarMensaje(data?.error || 'No se pudieron subir las imágenes', 'error');
+      mostrarMensaje(data?.error || 'No se pudieron subir las imÃ¡genes', 'error');
       return;
     }
 
@@ -144,10 +144,10 @@ async function subirImagenesCloudinary() {
 
     colocarImagenesEnInput(urls);
     input.value = '';
-    mostrarMensaje('Imágenes subidas correctamente', 'exito');
+    mostrarMensaje('ImÃ¡genes subidas correctamente', 'exito');
   } catch (error) {
     console.error(error);
-    mostrarMensaje('No se pudo conectar con el servidor de imágenes', 'error');
+    mostrarMensaje('No se pudo conectar con el servidor de imÃ¡genes', 'error');
   }
 }
 
@@ -221,7 +221,7 @@ function agregarVarianteFormulario() {
   );
 
   if (existe) {
-    mostrarMensaje('Esa combinación de talla y color ya fue agregada', 'error');
+    mostrarMensaje('Esa combinaciÃ³n de talla y color ya fue agregada', 'error');
     return;
   }
 
@@ -258,7 +258,7 @@ function renderizarVariantes() {
 
   if (variantesProducto.length === 0) {
     contenedor.innerHTML = `
-      <p style="font-size:13px;color:#777;">Todavía no has agregado variantes.</p>
+      <p style="font-size:13px;color:#777;">TodavÃ­a no has agregado variantes.</p>
     `;
     return;
   }
@@ -315,14 +315,14 @@ async function agregarProducto() {
     return;
   }
 
-  await guardarProducto('POST', `${API_PRODUCTOS}/productos`, '¡Producto registrado exitosamente!');
+  await guardarProducto('POST', `${API_PRODUCTOS}/productos`, 'Â¡Producto registrado exitosamente!');
 }
 
 async function actualizarProducto() {
   await guardarProducto(
     'PUT',
     `${API_PRODUCTOS}/productos/${productoEditarId}`,
-    '¡Producto actualizado exitosamente!'
+    'Â¡Producto actualizado exitosamente!'
   );
 }
 
@@ -395,3 +395,4 @@ async function guardarProducto(metodo, url, mensajeExito) {
     mostrarMensaje('No se pudo conectar con el servidor', 'error');
   }
 }
+

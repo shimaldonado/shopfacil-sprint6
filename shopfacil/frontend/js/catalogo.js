@@ -1,27 +1,27 @@
-// let todosLosProductos = [];
+﻿// let todosLosProductos = [];
 
 // // ================================
-// // Corregir textos con errores tipo algodÃ³n
+// // Corregir textos con errores tipo algodÃƒÂ³n
 // // ================================
 // function corregirTexto(texto) {
 //   if (!texto) return '';
 
 //   return String(texto)
-//     .replaceAll('Ã¡', 'á')
-//     .replaceAll('Ã©', 'é')
-//     .replaceAll('Ã­', 'í')
-//     .replaceAll('Ã³', 'ó')
-//     .replaceAll('Ãº', 'ú')
-//     .replaceAll('Ã±', 'ñ')
-//     .replaceAll('ÃÁ', 'Á')
-//     .replaceAll('Ã‰', 'É')
-//     .replaceAll('Ã“', 'Ó')
-//     .replaceAll('algodÃ³n', 'algodón')
-//     .replaceAll('PantalÃ³n', 'Pantalón')
-//     .replaceAll('descripciÃ³n', 'descripción');
+//     .replaceAll('ÃƒÂ¡', 'Ã¡')
+//     .replaceAll('ÃƒÂ©', 'Ã©')
+//     .replaceAll('ÃƒÂ­', 'Ã­')
+//     .replaceAll('ÃƒÂ³', 'Ã³')
+//     .replaceAll('ÃƒÂº', 'Ãº')
+//     .replaceAll('ÃƒÂ±', 'Ã±')
+//     .replaceAll('ÃƒÃ', 'Ã')
+//     .replaceAll('Ãƒâ€°', 'Ã‰')
+//     .replaceAll('Ãƒâ€œ', 'Ã“')
+//     .replaceAll('algodÃƒÂ³n', 'algodÃ³n')
+//     .replaceAll('PantalÃƒÂ³n', 'PantalÃ³n')
+//     .replaceAll('descripciÃƒÂ³n', 'descripciÃ³n');
 // }
 
-// // Evita que una descripción con símbolos rompa el HTML
+// // Evita que una descripciÃ³n con sÃ­mbolos rompa el HTML
 // function escaparHTML(texto) {
 //   return corregirTexto(texto)
 //     .replaceAll('&', '&amp;')
@@ -32,7 +32,7 @@
 // }
 
 // // ================================
-// // Navbar según sesión
+// // Navbar segÃºn sesiÃ³n
 // // ================================
 // function cargarNavbar() {
 //   const usuario = JSON.parse(localStorage.getItem('usuario'));
@@ -55,7 +55,7 @@
 //     ) {
 //       navLinks.insertAdjacentHTML('beforeend', `
 //         <a href="carrito.html" id="btn-carrito" class="carrito-link">
-//           🛒 Mi carrito
+//           ðŸ›’ Mi carrito
 //           <span id="carrito-contador" class="carrito-badge">0</span>
 //         </a>
 //         <a href="pedidos.html" id="btn-pedidos">Mis pedidos</a>
@@ -143,7 +143,7 @@
 // }
 
 // // ================================
-// // Cargar catálogo completo
+// // Cargar catÃ¡logo completo
 // // ================================
 // async function cargarProductos() {
 //   const catalogo = document.getElementById('catalogo');
@@ -185,7 +185,7 @@
 
 //   catalogo.innerHTML = productos.map((p, index) => {
 //     const nombre = escaparHTML(p.nombre);
-//     const descripcion = escaparHTML(p.descripcion || 'Sin descripción');
+//     const descripcion = escaparHTML(p.descripcion || 'Sin descripciÃ³n');
 //     const imagen = p.imagen || 'https://via.placeholder.com/500x400?text=Sin+imagen';
 //     const precio = Number(p.precio || 0).toFixed(2);
 //     const stock = Number(p.stock || 0);
@@ -251,7 +251,7 @@
 //   const token = localStorage.getItem('token');
 
 //   if (!usuario || !token) {
-//     alert('Debes iniciar sesión para agregar productos al carrito');
+//     alert('Debes iniciar sesiÃ³n para agregar productos al carrito');
 //     window.location.href = 'login.html';
 //     return;
 //   }
@@ -361,11 +361,11 @@ let favoritosIds = new Set();
 function corregirTexto(texto) {
   if (!texto) return '';
   return String(texto)
-    .replaceAll('Ã¡', 'á').replaceAll('Ã©', 'é').replaceAll('Ã­', 'í')
-    .replaceAll('Ã³', 'ó').replaceAll('Ãº', 'ú').replaceAll('Ã±', 'ñ')
-    .replaceAll('ÃÁ', 'Á').replaceAll('Ã‰', 'É').replaceAll('Ã"', 'Ó')
-    .replaceAll('algodÃ³n', 'algodón').replaceAll('PantalÃ³n', 'Pantalón')
-    .replaceAll('descripciÃ³n', 'descripción');
+    .replaceAll('ÃƒÂ¡', 'Ã¡').replaceAll('ÃƒÂ©', 'Ã©').replaceAll('ÃƒÂ­', 'Ã­')
+    .replaceAll('ÃƒÂ³', 'Ã³').replaceAll('ÃƒÂº', 'Ãº').replaceAll('ÃƒÂ±', 'Ã±')
+    .replaceAll('ÃƒÃ', 'Ã').replaceAll('Ãƒâ€°', 'Ã‰').replaceAll('Ãƒ"', 'Ã“')
+    .replaceAll('algodÃƒÂ³n', 'algodÃ³n').replaceAll('PantalÃƒÂ³n', 'PantalÃ³n')
+    .replaceAll('descripciÃƒÂ³n', 'descripciÃ³n');
 }
 
 function escaparHTML(texto) {
@@ -375,7 +375,7 @@ function escaparHTML(texto) {
 }
 
 // ================================
-// Navbar según sesión
+// Navbar segÃºn sesiÃ³n
 // ================================
 function cargarNavbar() {
   const usuario = JSON.parse(localStorage.getItem('usuario'));
@@ -399,7 +399,7 @@ function cargarNavbar() {
     ) {
       navLinks.insertAdjacentHTML('beforeend', `
         <a href="carrito.html" id="btn-carrito" class="carrito-link">
-          🛒 Mi carrito
+          ðŸ›’ Mi carrito
           <span id="carrito-contador" class="carrito-badge">0</span>
         </a>
         <a href="pedidos.html" id="btn-pedidos">Mis pedidos</a>
@@ -469,7 +469,7 @@ async function actualizarContadorCarrito() {
 }
 
 // ================================
-// Cargar catálogo completo
+// Cargar catÃ¡logo completo
 // ================================
 async function cargarProductos() {
   const catalogo = document.getElementById('catalogo');
@@ -501,7 +501,7 @@ function mostrarProductos(productos) {
 
   catalogo.innerHTML = productos.map((p, index) => {
     const nombre = escaparHTML(p.nombre);
-    const descripcion = escaparHTML(p.descripcion || 'Sin descripción');
+    const descripcion = escaparHTML(p.descripcion || 'Sin descripciÃ³n');
     const imagen = p.imagen || 'https://via.placeholder.com/500x400?text=Sin+imagen';
     const precio = Number(p.precio || 0).toFixed(2);
     const stock = Number(p.stock || 0);
@@ -568,7 +568,7 @@ function mostrarAvisoCatalogo(mensaje, tipo = 'info', subtexto = '') {
 }
 
 // ================================
-// Agregar al carrito — con toast bonito
+// Agregar al carrito â€” con toast bonito
 // ================================
 async function agregarAlCarrito(productoId, nombreProducto) {
   const usuario = JSON.parse(localStorage.getItem('usuario'));

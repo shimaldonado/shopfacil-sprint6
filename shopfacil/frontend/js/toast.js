@@ -1,4 +1,4 @@
-(function () {
+﻿(function () {
   const TOAST_DURATION = 3400;
 
   function crearContenedor() {
@@ -163,11 +163,11 @@
       overlay.className = 'sf-modal-overlay';
       overlay.innerHTML = `
         <div class="sf-modal-card" role="dialog" aria-modal="true" aria-labelledby="sf-modal-title">
-          <button type="button" class="sf-modal-close" aria-label="Cerrar">×</button>
-          <div class="sf-modal-icon">${opciones.icono || '📝'}</div>
-          <h3 id="sf-modal-title">${opciones.titulo || 'Confirmar acción'}</h3>
+          <button type="button" class="sf-modal-close" aria-label="Cerrar">Ã—</button>
+          <div class="sf-modal-icon">${opciones.icono || 'ðŸ“'}</div>
+          <h3 id="sf-modal-title">${opciones.titulo || 'Confirmar acciÃ³n'}</h3>
           <p>${opciones.descripcion || ''}</p>
-          <textarea id="sf-modal-input" rows="4" maxlength="180" placeholder="${opciones.placeholder || 'Escribe aquí...'}"></textarea>
+          <textarea id="sf-modal-input" rows="4" maxlength="180" placeholder="${opciones.placeholder || 'Escribe aquÃ­...'}"></textarea>
           <div class="sf-modal-error" id="sf-modal-error" style="display:none;"></div>
           <div class="sf-modal-actions">
             <button type="button" class="sf-btn-secundario" id="sf-modal-cancelar">Cancelar</button>
@@ -233,7 +233,7 @@
     }
 
     try {
-      const res = await fetch((window.SHOPFACIL_API_URL || 'http://localhost:3000/api') + '/notificaciones/contador', {
+      const res = await fetch((window.SHOPFACIL_API_URL || 'https://shopfacil-api.onrender.com/api') + '/notificaciones/contador', {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       const data = await res.json();

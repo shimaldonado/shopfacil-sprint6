@@ -1,11 +1,11 @@
-const API_PANEL = window.SHOPFACIL_API_URL || 'http://localhost:3000/api';
+﻿const API_PANEL = window.SHOPFACIL_API_URL || 'https://shopfacil-api.onrender.com/api';
 
 window.onload = function () {
   const usuario = JSON.parse(localStorage.getItem('usuario'));
   const token = localStorage.getItem('token');
 
   if (!usuario || !token) {
-    alert('Debes iniciar sesión');
+    alert('Debes iniciar sesiÃ³n');
     window.location.href = 'login.html';
     return;
   }
@@ -80,7 +80,7 @@ function nombreEstado(estado) {
     en_proceso: 'En proceso',
     enviado: 'Enviado',
     entregado: 'Entregado',
-    cancelacion_solicitada: 'Cancelación solicitada',
+    cancelacion_solicitada: 'CancelaciÃ³n solicitada',
     cancelado: 'Cancelado'
   };
   return nombres[estado] || estado || 'Pendiente';
@@ -127,7 +127,7 @@ async function cargarDashboardVendedor() {
   const contenedor = document.getElementById('dashboard-vendedor');
   if (!contenedor) return;
 
-  contenedor.innerHTML = '<p class="estado-vacio">Cargando métricas...</p>';
+  contenedor.innerHTML = '<p class="estado-vacio">Cargando mÃ©tricas...</p>';
 
   try {
     const res = await fetch(`${API_PANEL}/reportes/vendedor`, {
@@ -145,20 +145,20 @@ async function cargarDashboardVendedor() {
 
     contenedor.innerHTML = `
       <div class="dashboard-grid">
-        <article class="dashboard-card"><span>💵</span><p>Total vendido</p><strong>$${Number(m.total_vendido || 0).toFixed(2)}</strong></article>
-        <article class="dashboard-card"><span>📦</span><p>Pedidos</p><strong>${Number(m.total_pedidos || 0)}</strong></article>
-        <article class="dashboard-card"><span>⏳</span><p>Pendientes</p><strong>${Number(m.pedidos_pendientes || 0)}</strong></article>
-        <article class="dashboard-card"><span>✅</span><p>Entregados</p><strong>${Number(m.pedidos_entregados || 0)}</strong></article>
+        <article class="dashboard-card"><span>ðŸ’µ</span><p>Total vendido</p><strong>$${Number(m.total_vendido || 0).toFixed(2)}</strong></article>
+        <article class="dashboard-card"><span>ðŸ“¦</span><p>Pedidos</p><strong>${Number(m.total_pedidos || 0)}</strong></article>
+        <article class="dashboard-card"><span>â³</span><p>Pendientes</p><strong>${Number(m.pedidos_pendientes || 0)}</strong></article>
+        <article class="dashboard-card"><span>âœ…</span><p>Entregados</p><strong>${Number(m.pedidos_entregados || 0)}</strong></article>
       </div>
 
       <div class="dashboard-columns">
         <div class="dashboard-box">
-          <h4>Productos más vendidos</h4>
+          <h4>Productos mÃ¡s vendidos</h4>
           ${top.length ? top.map(p => `
             <div class="dashboard-list-item">
               <span>${escaparHTML(p.nombre)}</span>
-              <strong>${Number(p.cantidad_vendida || 0)} uds. · $${Number(p.total_vendido || 0).toFixed(2)}</strong>
-            </div>`).join('') : '<p class="estado-vacio">Aún no hay ventas registradas.</p>'}
+              <strong>${Number(p.cantidad_vendida || 0)} uds. Â· $${Number(p.total_vendido || 0).toFixed(2)}</strong>
+            </div>`).join('') : '<p class="estado-vacio">AÃºn no hay ventas registradas.</p>'}
         </div>
         <div class="dashboard-box">
           <h4>Alertas de stock bajo</h4>
@@ -199,8 +199,8 @@ async function cargarMisProductosVendedor() {
     if (!Array.isArray(productos) || productos.length === 0) {
       contenedor.innerHTML = `
         <div class="estado-vacio estado-vacio-card">
-          <strong>Aún no tienes productos publicados.</strong><br>
-          Registra tu primer producto para que aparezca en el catálogo.
+          <strong>AÃºn no tienes productos publicados.</strong><br>
+          Registra tu primer producto para que aparezca en el catÃ¡logo.
         </div>`;
       return;
     }
@@ -211,11 +211,11 @@ async function cargarMisProductosVendedor() {
           <thead>
             <tr>
               <th>Producto</th>
-              <th>Categoría</th>
+              <th>CategorÃ­a</th>
               <th>Precio</th>
               <th>Stock</th>
               <th>Variantes</th>
-              <th>Galería</th>
+              <th>GalerÃ­a</th>
               <th>Estado</th>
               <th>Acciones</th>
             </tr>
@@ -228,7 +228,7 @@ async function cargarMisProductosVendedor() {
                     <img src="${escaparHTML(imagenSeguraProducto(producto.imagen))}" alt="${escaparHTML(producto.nombre)}" onerror="this.src='https://via.placeholder.com/120x90?text=Producto'">
                     <div>
                       <strong>${escaparHTML(producto.nombre)}</strong>
-                      <span>${escaparHTML(producto.descripcion || 'Sin descripción')}</span>
+                      <span>${escaparHTML(producto.descripcion || 'Sin descripciÃ³n')}</span>
                     </div>
                   </div>
                 </td>
@@ -280,7 +280,7 @@ function renderSeguimiento(pedido) {
   }).join('');
 
   const cancelacion = ['cancelacion_solicitada', 'cancelado'].includes(pedido.estado)
-    ? `<div class="tracking-step activo tracking-cancelado"><div class="tracking-dot"></div><div><strong>${nombreEstado(pedido.estado)}</strong><span>Proceso de cancelación</span></div></div>`
+    ? `<div class="tracking-step activo tracking-cancelado"><div class="tracking-dot"></div><div><strong>${nombreEstado(pedido.estado)}</strong><span>Proceso de cancelaciÃ³n</span></div></div>`
     : '';
 
   return `<div class="tracking-box">${pasos}${cancelacion}</div>`;
@@ -290,8 +290,8 @@ function renderAccionEstado(pedido) {
   if (pedido.estado === 'cancelacion_solicitada') {
     return `
       <div class="acciones acciones-cancelacion">
-        <button class="btn-estado btn-entregado" onclick="resolverCancelacion(${pedido.id}, 'aprobar')">Aprobar cancelación</button>
-        <button class="btn-estado btn-proceso" onclick="resolverCancelacion(${pedido.id}, 'rechazar')">Rechazar cancelación</button>
+        <button class="btn-estado btn-entregado" onclick="resolverCancelacion(${pedido.id}, 'aprobar')">Aprobar cancelaciÃ³n</button>
+        <button class="btn-estado btn-proceso" onclick="resolverCancelacion(${pedido.id}, 'rechazar')">Rechazar cancelaciÃ³n</button>
       </div>`;
   }
 
@@ -333,7 +333,7 @@ async function cargarPedidosVendedor() {
     }
 
     if (!Array.isArray(pedidos) || pedidos.length === 0) {
-      div.innerHTML = '<p class="estado-vacio">Todavía no existen pedidos para tus productos.</p>';
+      div.innerHTML = '<p class="estado-vacio">TodavÃ­a no existen pedidos para tus productos.</p>';
       return;
     }
 
@@ -342,7 +342,7 @@ async function cargarPedidosVendedor() {
         <div class="pedido-top">
           <div>
             <h3>Pedido #${pedido.id}</h3>
-            <p><strong>Código:</strong> ${escaparHTML(pedido.codigo || 'Sin código')}</p>
+            <p><strong>CÃ³digo:</strong> ${escaparHTML(pedido.codigo || 'Sin cÃ³digo')}</p>
           </div>
           <span class="estado ${escaparHTML(pedido.estado)}">${nombreEstado(pedido.estado)}</span>
         </div>
@@ -352,16 +352,16 @@ async function cargarPedidosVendedor() {
           <p><strong>Correo:</strong> ${escaparHTML(pedido.comprador_correo || pedido.cliente_correo || 'No disponible')}</p>
           <p><strong>Productos:</strong> ${escaparHTML(pedido.productos || 'Sin detalle')}</p>
           <p><strong>Total:</strong> $${Number(pedido.total || 0).toFixed(2)}</p>
-          ${pedido.metodo_pago ? `<p><strong>Método de pago:</strong> ${escaparHTML(pedido.metodo_pago_texto || metodoPagoTexto(pedido.metodo_pago))}</p>` : ''}
-          ${pedido.metodo_pago === 'transferencia' && pedido.comprobante_transferencia ? `<p><strong>Comprobante de transferencia:</strong> ${escaparHTML(pedido.comprobante_transferencia)}${pedido.banco_transferencia ? ` · ${escaparHTML(pedido.banco_transferencia)}` : ''}</p>` : ''}
+          ${pedido.metodo_pago ? `<p><strong>MÃ©todo de pago:</strong> ${escaparHTML(pedido.metodo_pago_texto || metodoPagoTexto(pedido.metodo_pago))}</p>` : ''}
+          ${pedido.metodo_pago === 'transferencia' && pedido.comprobante_transferencia ? `<p><strong>Comprobante de transferencia:</strong> ${escaparHTML(pedido.comprobante_transferencia)}${pedido.banco_transferencia ? ` Â· ${escaparHTML(pedido.banco_transferencia)}` : ''}</p>` : ''}
           ${pedido.direccion_entrega ? `<p><strong>Entrega:</strong> ${escaparHTML(pedido.direccion_entrega)}, ${escaparHTML(pedido.ciudad_entrega || '')}, ${escaparHTML(pedido.provincia_entrega || '')}</p>` : ''}
           ${pedido.referencia_entrega ? `<p><strong>Referencia:</strong> ${escaparHTML(pedido.referencia_entrega)}</p>` : ''}
-          ${enlaceMapaEntrega(pedido) ? `<p><strong>Ubicación aproximada:</strong> <a class="link-mapa-entrega" href="${enlaceMapaEntrega(pedido)}" target="_blank" rel="noopener">Ver en Google Maps</a></p>` : ''}
+          ${enlaceMapaEntrega(pedido) ? `<p><strong>UbicaciÃ³n aproximada:</strong> <a class="link-mapa-entrega" href="${enlaceMapaEntrega(pedido)}" target="_blank" rel="noopener">Ver en Google Maps</a></p>` : ''}
           <p><strong>Fecha:</strong> ${formatearFecha(pedido.created_at || pedido.fecha)}</p>
         </div>
 
         <div class="seguimiento-pedido">
-          <h4>Seguimiento del envío</h4>
+          <h4>Seguimiento del envÃ­o</h4>
           ${renderSeguimiento(pedido)}
         </div>
 
@@ -414,12 +414,12 @@ async function resolverCancelacion(id, accion) {
     const data = await res.json();
 
     if (res.ok) {
-      mostrarAviso(data.message || 'Cancelación procesada', 'exito');
+      mostrarAviso(data.message || 'CancelaciÃ³n procesada', 'exito');
       if (typeof sfActualizarNotificaciones === 'function') sfActualizarNotificaciones(false);
       cargarDashboardVendedor();
       cargarPedidosVendedor();
     } else {
-      mostrarAviso(data.error || 'No se pudo procesar la cancelación', 'error');
+      mostrarAviso(data.error || 'No se pudo procesar la cancelaciÃ³n', 'error');
     }
   } catch (error) {
     console.error(error);
@@ -450,7 +450,7 @@ async function cargarPreguntasVendedor() {
     }
 
     if (!Array.isArray(preguntas) || preguntas.length === 0) {
-      contenedor.innerHTML = '<p class="estado-vacio">Aún no tienes preguntas de compradores.</p>';
+      contenedor.innerHTML = '<p class="estado-vacio">AÃºn no tienes preguntas de compradores.</p>';
       return;
     }
 
@@ -459,7 +459,7 @@ async function cargarPreguntasVendedor() {
         <div class="pregunta-vendedor-head">
           <div>
             <h4>${escaparHTML(p.producto)}</h4>
-            <p>${escaparHTML(p.comprador)} · ${escaparHTML(p.comprador_correo || '')}</p>
+            <p>${escaparHTML(p.comprador)} Â· ${escaparHTML(p.comprador_correo || '')}</p>
             <small>${formatearFecha(p.created_at)}</small>
           </div>
           <span class="badge-estado ${p.respuesta ? 'badge-activo' : 'badge-pendiente'}">${p.respuesta ? 'Respondida' : 'Pendiente'}</span>
@@ -507,3 +507,4 @@ async function responderPregunta(id) {
     mostrarAviso('Error al conectar con el servidor', 'error');
   }
 }
+
