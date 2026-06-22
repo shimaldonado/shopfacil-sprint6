@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agregar producto — ShopFácil</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <a href="index.html" class="logo">🛒 ShopFácil</a>
+    <div class="nav-links">
+      <a href="index.html">Ver catálogo</a>
+      <a href="#" onclick="cerrarSesion()">Cerrar sesión</a>
+    </div>
+  </nav>
+
+  <!-- Formulario -->
+  <div class="form-card" style="max-width:520px;">
+    <h2 id="titulo-form-producto">Agregar producto</h2>
+
+    <div id="mensaje" class="mensaje"></div>
+
+    <div class="form-group">
+      <label>Nombre del producto</label>
+      <input type="text" id="nombre" placeholder="Ej: Camisa Azul">
+    </div>
+
+    <div class="form-group">
+      <label>Descripción</label>
+      <textarea id="descripcion" placeholder="Descripción del producto..."
+        style="width:100%;padding:10px 12px;border:1px solid #ddd;border-radius:6px;font-size:14px;min-height:80px;"></textarea>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+      <div class="form-group">
+        <label>Precio ($)</label>
+        <input type="number" id="precio" placeholder="0.00" min="0" step="0.01">
+      </div>
+      <div class="form-group">
+        <label>Stock (unidades)</label>
+        <input type="number" id="stock" placeholder="0" min="0">
+      </div>
+    </div>
+    <div class="form-group">
+    <label>Categoría</label>
+    <select id="categoria" title="categoria">
+      <option value="ropa">Ropa</option>
+      <option value="calzado">Calzado</option>
+      <option value="maquillaje">Maquillaje</option>
+      <option value="aseo">Aseo</option>
+      <option value="accesorios">Accesorios</option>
+      <option value="tecnologia">Tecnología</option>
+      <option value="tecnologia">Otro</option>
+    </select>
+    </div>
+
+    <div class="form-group">
+      <label>URL de imagen / galería</label>
+      <input type="text" id="imagen" placeholder="https://... o URLs separadas por coma">
+      <small style="display:block;color:#666;margin-top:6px;">También puedes subir imágenes reales con Cloudinary.</small>
+    </div>
+
+    <!-- HU-25: Subida real de imágenes con Cloudinary -->
+    <div class="form-group cloudinary-box">
+      <label>Subir imágenes reales del producto</label>
+      <input type="file" id="imagenes-cloudinary" accept="image/*" multiple>
+      <small>
+        Selecciona hasta 6 imágenes. El backend las subirá a Cloudinary y colocará automáticamente sus URLs en la galería del producto.
+      </small>
+      <button type="button" class="btn btn-cloudinary" onclick="subirImagenesCloudinary()">
+        Subir imágenes a Cloudinary
+      </button>
+      <div id="preview-imagenes-cloudinary" class="preview-imagenes"></div>
+    </div>
+
+    <!-- HU-18: Variantes de producto -->
+    <div class="form-group">
+      <label>Variantes del producto (opcional)</label>
+      <p style="font-size:13px;color:#666;margin:4px 0 10px;">
+        Agrega tallas, colores y stock por variante. Ejemplo: Azul - S - 3 unidades.
+      </p>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;">
+        <input type="text" id="variante-talla" placeholder="Talla: S, M, 38">
+        <input type="text" id="variante-color" placeholder="Color: Azul">
+        <input type="number" id="variante-stock" placeholder="Stock" min="0">
+      </div>
+
+      <button type="button" class="btn" style="margin-top:10px;background:#1F4E79;" onclick="agregarVarianteFormulario()">
+        Agregar variante
+      </button>
+
+      <div id="lista-variantes" style="margin-top:12px;"></div>
+    </div>
+
+
+    <button id="btn-guardar-producto" class="btn" onclick="agregarProducto()">Guardar producto</button>
+
+    <div class="form-link">
+      <a id="link-volver-productos" href="index.html">← Volver al catálogo</a>
+    </div>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/productos.js"></script>
+</body>
+</html>

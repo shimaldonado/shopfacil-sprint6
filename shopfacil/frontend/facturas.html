@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mis facturas — ShopFácil</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/facturas.css">
+</head>
+<body>
+  <nav class="navbar">
+    <a href="index.html" class="logo">&#128722; ShopFácil</a>
+    <div class="nav-links">
+      <a href="index.html">Catálogo</a>
+      <a href="carrito.html">Mi carrito</a>
+      <a href="pedidos.html">Mis pedidos</a>
+      <a href="notificaciones.html" class="notificacion-link">Notificaciones</a>
+      <a href="#" onclick="cerrarSesion()">Cerrar sesión</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="fac-header">
+      <div class="fac-header-left">
+        <div class="fac-icon-circle">&#129534;</div>
+        <div>
+          <h2 class="fac-titulo">Historial de facturas</h2>
+          <p class="fac-subtitulo">Todos tus comprobantes de compra con IVA incluido</p>
+        </div>
+      </div>
+      <button class="fac-btn-print-all" onclick="window.print()">
+        &#128438; Imprimir todo
+      </button>
+    </div>
+
+    <div id="fac-stats" class="fac-stats-row" style="display:none">
+      <div class="fac-stat-card">
+        <div class="fac-stat-num" id="stat-total-facturas">0</div>
+        <div class="fac-stat-label">Facturas emitidas</div>
+      </div>
+      <div class="fac-stat-card">
+        <div class="fac-stat-num" id="stat-total-gastado">$0.00</div>
+        <div class="fac-stat-label">Total gastado</div>
+      </div>
+      <div class="fac-stat-card">
+        <div class="fac-stat-num" id="stat-total-iva">$0.00</div>
+        <div class="fac-stat-label">IVA pagado (15%)</div>
+      </div>
+      <div class="fac-stat-card">
+        <div class="fac-stat-num" id="stat-total-base">$0.00</div>
+        <div class="fac-stat-label">Base imponible</div>
+      </div>
+    </div>
+
+    <div id="lista-facturas">
+      <div class="fac-loading">
+        <div class="fac-spinner"></div>
+        <p>Cargando tus facturas...</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/toast.js"></script>
+  <script src="js/facturas.js"></script>
+</body>
+</html>

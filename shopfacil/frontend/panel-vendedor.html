@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel vendedor — ShopFácil</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+  <nav class="navbar">
+    <a href="index.html" class="logo">🛒 ShopFácil</a>
+
+    <div class="nav-links">
+      <a href="agregar-producto.html">+ Agregar producto</a>
+      <a href="index.html">Catálogo</a>
+      <a href="notificaciones.html" class="notificacion-link">Notificaciones</a>
+      <a href="#" onclick="cerrarSesion()">Cerrar sesión</a>
+    </div>
+  </nav>
+
+  <div class="container panel-vendedor-container">
+    <div class="panel-header">
+      <div>
+        <span class="panel-etiqueta">Panel del vendedor</span>
+        <h2>Gestión de productos y pedidos</h2>
+        <p>Administra tus productos publicados, sus variantes, galería de imágenes y pedidos recibidos.</p>
+      </div>
+      <a href="agregar-producto.html" class="btn-panel-principal">+ Agregar producto</a>
+    </div>
+
+    <div id="mensaje" class="mensaje"></div>
+
+    <section class="panel-seccion dashboard-vendedor-seccion">
+      <div class="panel-seccion-titulo">
+        <div>
+          <h3>📊 Dashboard de ventas</h3>
+          <p>Resumen de ventas, pedidos y alertas de inventario de tus productos.</p>
+        </div>
+      </div>
+      <div id="dashboard-vendedor">
+        <p>Cargando métricas...</p>
+      </div>
+    </section>
+
+    <section class="panel-seccion">
+      <div class="panel-seccion-titulo">
+        <div>
+          <h3>🛍️ Mis productos</h3>
+          <p>Solo se muestran los productos creados por esta cuenta de vendedor.</p>
+        </div>
+      </div>
+      <div id="lista-productos-vendedor">
+        <p>Cargando productos...</p>
+      </div>
+    </section>
+
+
+
+    <section class="panel-seccion">
+      <div class="panel-seccion-titulo">
+        <div>
+          <h3>💬 Preguntas recibidas</h3>
+          <p>Responde dudas de compradores sobre tus productos.</p>
+        </div>
+      </div>
+      <div id="lista-preguntas-vendedor">
+        <p>Cargando preguntas...</p>
+      </div>
+    </section>
+    <section class="panel-seccion">
+      <div class="panel-seccion-titulo">
+        <div>
+          <h3>📦 Pedidos recibidos</h3>
+          <p>Solo se muestran pedidos que contienen productos de este vendedor.</p>
+        </div>
+      </div>
+      <div id="lista-pedidos">
+        <p>Cargando pedidos...</p>
+      </div>
+    </section>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/toast.js"></script>
+  <script src="js/panel-vendedor.js"></script>
+</body>
+</html>

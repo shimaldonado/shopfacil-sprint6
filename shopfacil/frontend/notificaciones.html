@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Notificaciones — ShopFácil</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <nav class="navbar">
+    <a href="index.html" class="logo">🛒 ShopFácil</a>
+    <div class="nav-links">
+      <a href="index.html">Catálogo</a>
+      <a href="pedidos.html">Mis pedidos</a>
+      <a href="facturas.html">Mis facturas</a>
+      <a href="carrito.html">Mi carrito</a>
+      <a href="#" onclick="cerrarSesion()">Cerrar sesión</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="notificaciones-header">
+      <div>
+        <h2>🔔 Mis notificaciones</h2>
+        <p>Revisa los cambios de estado, cancelaciones y avisos relacionados con tus pedidos.</p>
+      </div>
+      <button class="btn-marcar-leidas" onclick="marcarTodasLeidas()">Marcar todas como leídas</button>
+    </div>
+
+    <div id="lista-notificaciones">
+      <p>Cargando notificaciones...</p>
+    </div>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/toast.js"></script>
+  <script src="js/notificaciones.js"></script>
+</body>
+</html>

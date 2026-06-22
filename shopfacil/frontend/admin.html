@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel de administración - ShopFácil</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <nav class="navbar">
+    <a href="index.html" class="logo">🛒 ShopFácil</a>
+    <div class="nav-links" id="navAdmin">
+      <a href="index.html">Catálogo</a>
+      <a href="#" onclick="cerrarSesion()">Cerrar sesión</a>
+    </div>
+  </nav>
+
+  <main class="admin-dashboard">
+    <section class="admin-hero">
+      <div>
+        <span class="admin-eyebrow">Panel administrativo</span>
+        <h1>Gestión de usuarios</h1>
+        <p>Administra vendedores, compradores, roles y estados de cuenta de ShopFácil.</p>
+      </div>
+      <div class="admin-hero-card">
+        <span class="admin-hero-icon">🛡️</span>
+        <div>
+          <strong>Acceso protegido</strong>
+          <p>Solo usuarios con rol administrador pueden ver esta sección.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="admin-stats-grid">
+      <article class="admin-stat-card">
+        <span class="stat-icon">👥</span>
+        <div>
+          <p>Total usuarios</p>
+          <strong id="statTotal">0</strong>
+        </div>
+      </article>
+      <article class="admin-stat-card">
+        <span class="stat-icon">✅</span>
+        <div>
+          <p>Activos</p>
+          <strong id="statActivos">0</strong>
+        </div>
+      </article>
+      <article class="admin-stat-card">
+        <span class="stat-icon">🛍️</span>
+        <div>
+          <p>Compradores</p>
+          <strong id="statCompradores">0</strong>
+        </div>
+      </article>
+      <article class="admin-stat-card">
+        <span class="stat-icon">🏪</span>
+        <div>
+          <p>Vendedores</p>
+          <strong id="statVendedores">0</strong>
+        </div>
+      </article>
+    </section>
+
+
+
+    <section class="admin-panel-card admin-reportes-card">
+      <div class="card-title-row">
+        <div>
+          <span class="admin-section-label">HU-32</span>
+          <h2>Reportes generales</h2>
+        </div>
+        <span class="card-icon">📊</span>
+      </div>
+      <p class="card-description">Consulta métricas generales de usuarios, productos, pedidos y ventas de ShopFácil.</p>
+      <div id="dashboardAdmin" class="dashboard-admin-box">
+        <p>Cargando reportes...</p>
+      </div>
+    </section>
+
+    <section class="admin-layout">
+      <article class="admin-panel-card vendedor-card">
+        <div class="card-title-row">
+          <div>
+            <span class="admin-section-label">HU-17</span>
+            <h2>Registrar vendedor</h2>
+          </div>
+          <span class="card-icon">➕</span>
+        </div>
+        <p class="card-description">Crea una cuenta con rol vendedor para que pueda publicar productos, variantes e imágenes.</p>
+
+        <form id="formRegistroVendedor" class="admin-form-modern">
+          <label>
+            Nombre
+            <input id="nombreVendedor" type="text" placeholder="Ej. Vendedor Demo" required>
+          </label>
+          <label>
+            Correo
+            <input id="correoVendedor" type="email" placeholder="vendedor@shopfacil.com" required>
+          </label>
+          <label>
+            Contraseña
+            <input id="passwordVendedor" type="password" placeholder="Mínimo 6 caracteres" required>
+          </label>
+          <button class="btn-admin-primary" type="submit">Crear vendedor</button>
+        </form>
+      </article>
+
+      <article class="admin-panel-card usuarios-card">
+        <div class="usuarios-toolbar">
+          <div>
+            <span class="admin-section-label">HU-12 · HU-13 · HU-16</span>
+            <h2>Usuarios registrados</h2>
+          </div>
+          <div class="toolbar-actions">
+            <input id="busquedaUsuarios" type="search" placeholder="Buscar usuario o correo...">
+            <select id="filtroRol" title="Filtrar por rol">
+              <option value="todos">Todos los roles</option>
+              <option value="admin">Admin</option>
+              <option value="vendedor">Vendedor</option>
+              <option value="comprador">Comprador</option>
+            </select>
+            <select id="filtroEstado" title="Filtrar por estado de cuenta">
+              <option value="todos">Todos los estados</option>
+              <option value="activo">Activos</option>
+              <option value="inactivo">Inactivos</option>
+            </select>
+          </div>
+        </div>
+
+        <div id="mensajeAdmin" class="admin-message" hidden></div>
+
+        <div class="admin-table-wrapper">
+          <table class="admin-users-table">
+            <thead>
+              <tr>
+                <th>Usuario</th>
+                <th>Correo</th>
+                <th>Rol</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="tablaUsuariosAdmin">
+              <tr>
+                <td colspan="5" class="loading-cell">Cargando usuarios...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <script src="js/admin.js"></script>
+  <script src="js/config.js"></script>
+</body>
+</html>

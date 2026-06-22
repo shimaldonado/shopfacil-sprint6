@@ -1,0 +1,210 @@
+/* ================================
+   ShopFácil — Facturas
+================================ */
+.fac-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+  gap: 16px;
+  background: white;
+  border-radius: 18px;
+  padding: 24px 28px;
+  border: 1px solid #e0e7f0;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+.fac-header-left { display: flex; align-items: center; gap: 16px; }
+.fac-icon-circle {
+  width: 56px; height: 56px;
+  background: #E6F1FB;
+  border-radius: 16px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 28px;
+  flex-shrink: 0;
+}
+.fac-titulo { margin: 0 0 4px; color: #1F4E79; font-size: 26px; }
+.fac-subtitulo { margin: 0; color: #64748b; font-size: 14px; }
+
+.fac-btn-print-all {
+  background: #1F4E79; color: white; border: none;
+  padding: 12px 22px; border-radius: 10px;
+  font-size: 14px; font-weight: 600; cursor: pointer;
+  transition: background 0.2s;
+}
+.fac-btn-print-all:hover { background: #163a5c; }
+
+/* Stats */
+.fac-stats-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-bottom: 28px;
+}
+.fac-stat-card {
+  background: white;
+  border-radius: 14px;
+  padding: 18px 20px;
+  border: 1px solid #e0e7f0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  text-align: center;
+}
+.fac-stat-num {
+  font-size: 26px; font-weight: 800;
+  color: #1F4E79; margin-bottom: 4px;
+}
+.fac-stat-label { font-size: 12px; color: #64748b; font-weight: 500; }
+
+/* Loading */
+.fac-loading {
+  text-align: center; padding: 60px 20px;
+  background: white; border-radius: 16px;
+  color: #64748b;
+}
+.fac-spinner {
+  width: 40px; height: 40px;
+  border: 4px solid #e0e7f0;
+  border-top-color: #1F4E79;
+  border-radius: 50%;
+  animation: fac-spin 0.8s linear infinite;
+  margin: 0 auto 16px;
+}
+@keyframes fac-spin { to { transform: rotate(360deg); } }
+
+/* Vacío */
+.fac-vacio {
+  text-align: center; padding: 70px 20px;
+  background: white; border-radius: 16px;
+  border: 1px dashed #cbd5e1;
+}
+.fac-vacio-icon { font-size: 60px; margin-bottom: 16px; }
+.fac-vacio h3 { color: #334155; margin: 0 0 8px; }
+.fac-vacio p { color: #94a3b8; font-size: 14px; margin: 0 0 20px; }
+
+/* Tarjeta factura */
+.fac-card {
+  background: white;
+  border-radius: 18px;
+  border: 1px solid #e0e7f0;
+  margin-bottom: 28px;
+  overflow: hidden;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.07);
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.fac-card:hover {
+  box-shadow: 0 8px 28px rgba(31,78,121,0.13);
+  transform: translateY(-2px);
+}
+
+/* Cabecera azul */
+.fac-cab {
+  background: #1F4E79;
+  padding: 22px 28px;
+  display: flex; justify-content: space-between;
+  align-items: flex-start; flex-wrap: wrap; gap: 14px;
+}
+.fac-cab-logo { color: white; }
+.fac-cab-logo-text {
+  font-size: 22px; font-weight: 800; letter-spacing: -0.5px;
+}
+.fac-cab-logo-sub {
+  font-size: 12px; opacity: 0.75; margin-top: 3px;
+}
+.fac-cab-right { text-align: right; color: white; }
+.fac-cab-num { font-size: 20px; font-weight: 700; letter-spacing: 0.5px; }
+.fac-cab-tipo {
+  font-size: 11px; opacity: 0.7;
+  text-transform: uppercase; letter-spacing: 0.08em;
+  margin-top: 4px;
+}
+
+/* Datos cliente */
+.fac-datos {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-bottom: 1px solid #edf2f7;
+}
+.fac-dato {
+  padding: 16px 22px;
+  border-right: 1px solid #edf2f7;
+}
+.fac-dato:last-child { border-right: none; }
+.fac-dato-label {
+  font-size: 10px; color: #94a3b8;
+  text-transform: uppercase; letter-spacing: 0.08em;
+  margin-bottom: 5px; font-weight: 700;
+}
+.fac-dato-val { font-size: 15px; font-weight: 600; color: #1b2a38; }
+.fac-dato-sub { font-size: 12px; color: #94a3b8; margin-top: 2px; }
+
+/* Productos */
+.fac-productos {
+  padding: 16px 22px;
+  border-bottom: 1px solid #edf2f7;
+}
+.fac-productos-titulo {
+  font-size: 11px; color: #94a3b8;
+  text-transform: uppercase; letter-spacing: 0.08em;
+  margin-bottom: 10px; font-weight: 700;
+}
+.fac-tag {
+  display: inline-block;
+  background: #f1f5f9; color: #334155;
+  border-radius: 8px; padding: 5px 12px;
+  font-size: 13px; margin: 3px 4px 3px 0;
+  border: 1px solid #e2e8f0;
+}
+
+/* Totales */
+.fac-totales { padding: 18px 22px; background: #f8fafc; }
+.fac-totales-inner { max-width: 340px; margin-left: auto; }
+.fac-fila {
+  display: flex; justify-content: space-between;
+  align-items: center; padding: 5px 0;
+  font-size: 14px; color: #64748b;
+}
+.fac-fila-grand {
+  font-size: 20px; font-weight: 800; color: #1F4E79;
+  border-top: 2px solid #1F4E79;
+  margin-top: 10px; padding-top: 12px;
+  display: flex; justify-content: space-between;
+}
+.fac-badge-iva {
+  font-size: 11px; background: #EAF3DE; color: #27500A;
+  border-radius: 20px; padding: 3px 10px;
+  margin-left: 8px; font-weight: 700;
+}
+
+/* Pie */
+.fac-pie {
+  padding: 14px 22px; background: white;
+  border-top: 1px solid #edf2f7;
+  display: flex; justify-content: space-between;
+  align-items: center; flex-wrap: wrap; gap: 12px;
+}
+.fac-estado-pagada {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 7px 16px; border-radius: 20px;
+  font-size: 13px; font-weight: 700;
+  background: #EAF3DE; color: #27500A;
+}
+.fac-pie-acciones { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.fac-pie-fecha { font-size: 12px; color: #94a3b8; }
+.fac-btn-print {
+  background: transparent; border: 1.5px solid #1F4E79;
+  color: #1F4E79; padding: 8px 18px;
+  border-radius: 8px; font-size: 13px;
+  font-weight: 600; cursor: pointer; transition: all 0.2s;
+}
+.fac-btn-print:hover { background: #1F4E79; color: white; }
+
+@media print {
+  .navbar, .fac-header, .fac-stats-row, .fac-btn-print, .fac-btn-print-all { display: none !important; }
+  .fac-card { box-shadow: none !important; transform: none !important; break-inside: avoid; }
+}
+@media (max-width: 760px) {
+  .fac-datos { grid-template-columns: 1fr 1fr; }
+  .fac-stats-row { grid-template-columns: 1fr 1fr; }
+  .fac-cab { flex-direction: column; }
+  .fac-cab-right { text-align: left; }
+}

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registro — ShopFácil</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <a href="index.html" class="logo">🛒 ShopFácil</a>
+    <div class="nav-links">
+      <a href="login.html">Iniciar sesión</a>
+    </div>
+  </nav>
+
+  <!-- Formulario de registro -->
+  <div class="form-card">
+    <h2>Crear cuenta</h2>
+
+    <!-- Mensaje de error o éxito -->
+    <div id="mensaje" class="mensaje"></div>
+
+    <div class="form-group">
+      <label>Nombre completo</label>
+      <input type="text" id="nombre" placeholder="Tu nombre">
+    </div>
+
+    <div class="form-group">
+      <label>Correo electrónico</label>
+      <input type="email" id="correo" placeholder="tu@correo.com">
+    </div>
+
+    <div class="form-group">
+      <label>Contraseña</label>
+      <input type="password" id="password" placeholder="Mínimo 6 caracteres">
+    </div>
+
+    <button class="btn" onclick="registrar()">Crear cuenta</button>
+
+    <div class="form-link">
+      ¿Ya tienes cuenta? <a href="login.html">Inicia sesión</a>
+    </div>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/auth.js"></script>
+</body>
+</html>
